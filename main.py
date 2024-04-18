@@ -107,10 +107,6 @@ for i, row in df2.iloc[:len(df2)//2].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
     graph.add_node(curr_node, cols1)
-    
-    # for existing_id, adj_nodes in graph.adj_list:
-    #     existing_node = existing
-    #     graph.add_edge(curr_node, existing_node)
 
 # parse through second half of dataset
 # add nodes based on all 4 criteria
@@ -118,8 +114,38 @@ for i, row in df2.iloc[len(df2)//2:].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
     graph.add_node(curr_node, criteria)
+    
+# add edges between nodes
+keys = list(graph.adj_list.keys())
+for i in range(len(keys)):
+    for j in range(i+1, len(keys)):
+        graph.add_edge(keys[i][1], keys[j][1])
 
 
+num = 0
+for key, neighbors in graph.adj_list.items():
+    num = num + 1
+    num_neighbors = len(neighbors)
+    print(f"Node {key[0]} has {num_neighbors} neighbors.")
+    
+    if num > 30:
+        break
+    # print(neighbors[5])
+    
+max_sim = graph.adj_list[keys[0]][0][1]
+min_sim = graph.adj_list[keys[0]][0][1]
+
+for key, neighbors in graph.adj_list.items():
+    for item in neighbors:
+        if item[1] > max_sim:
+            max_sim = item[1]
+        elif item[1] < min_sim:
+            min_sim = item[1]
+    
+print(min_sim)
+print(max_sim)
+    
 print(num1)
 print(len(graph.adj_list))
+
 

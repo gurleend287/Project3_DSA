@@ -5,7 +5,6 @@ class Graph:
     def __init__(self, threshold_map):
         self.adj_list = {}
         self.threshold_map = threshold_map
-        self.num1 = 0
     
     # helper function
     # returns similarity score used to determine if two nodes should be connected
@@ -23,8 +22,10 @@ class Graph:
     # similary score is weight of edge
     def add_edge(self, node1: Node, node2: Node):
         sim_score = self.find_similarity(node1, node2)
-        # getting high similarity scores for most nodes - 0.999985 is good threshold for now
-        if sim_score >= 0.999985:
+        # print(sim_score)
+        # getting high similarity scores for most nodes
+        # 0.9999995 is good threshold for sparse graph - obtained through trial and error
+        if sim_score >= 0.9999995:
             key1 = (node1.track_id, node1)
             key2 = (node2.track_id, node2)
             self.adj_list[key1].append((key2, sim_score))
@@ -34,10 +35,8 @@ class Graph:
     def add_node(self, node: Node, cols: list[str]):
         for col in cols:
             if getattr(node, col) < self.threshold_map[col][0] or getattr(node, col) > self.threshold_map[col][1]:
-                # print("false")
                 return # node not added
         
-        # num1 = num1+1
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
