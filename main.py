@@ -4,6 +4,8 @@ import os
 import base64
 from requests import post
 import pandas as pd
+from node import Node
+from graph import Graph
 
 # loads environment variable files
 load_dotenv()
@@ -48,33 +50,42 @@ relevant_cols = [
 ]
 df2 = df[relevant_cols].copy()
 
+# mood ranges for valence, energy, and dancabiliity
+# may need to broaden ranges/overlap if not enough songs meet criteria
+criteria = ['danceability', 'energy', 'valence', 'tempo']
+ranges_map = {}
+
+for col in criteria:
+    min  = df2[col].min()
+    max = df2[col].max()
+    step = (max - min) / 10
+    
+    ranges = {}
+    for i in range(1,11):
+        lower = min + (i - 1) * step
+        upper = max + i * step
+        ranges[i] = (lower, upper)
+        
+    ranges_map[col] = ranges
+    
 # get user input for mood
 mood_input = input("Rate your mood (1-10): ")
 
-# mood ranges for valence, energy, and dancabiliity
-# may need to broaden ranges if not enough songs meet criteria
-mood_ranges = {
-    1: (0, 0.1),
-    2: (0.1, 0.2),
-    3: (0.2, 0.3),
-    4: (0.3, 0.4),
-    5: (0.4, 0.5),
-    6: (0.5, 0.6),
-    7: (0.6, 0.7),
-    8: (0.7, 0.8),
-    9: (0.8, 0.9),
-    10: (0.9, 1)
-}
+# set thresholds based on chosen mood
+threshold_map = {}
+for key, ranges in ranges_map.items():
+    threshold_map[key] = ranges.get(int(mood_input))
 
-# mood range for tempo
-min_tempo = df2['tempo'].min()
-max_tempo = df2['tempo'].max()
-tempo_step = (max_tempo - min_tempo) / 10
-
-tempo_ranges = {}
-for i in range(1, 11):
-    lower = min_tempo + (i - 1) * tempo_step
-    upper = min_tempo + i * tempo_step
-    tempo_ranges[i] = (lower, upper)
+print(threshold_map)
     
-print(tempo_ranges)
+# test node class
+first = df2.iloc[0].to_dict()
+node1 = Node(**first)
+second = df2.iloc[1].to_dict()
+node2 = Node(**second)
+
+# # test graph class
+# adj_list = Graph(threshold_map)
+# cols = ['valence', 'energy']
+# adj_list.add_node(node1, cols)
+# print(adj_list)
