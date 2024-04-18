@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 import base64
 from requests import post
+import pandas as pd
 
 # loads environment variable files
 load_dotenv()
@@ -26,6 +27,7 @@ def get_token():
     result = post(url, headers=headers, data=data)
     json_result = json.loads(result.content)
     token = json_result["access_token"]
+    
     return token
 
 # create header using access token for requests
@@ -33,3 +35,46 @@ def get_auth_header(token):
      return {"Authorization": "Bearer " + token}
 
 token = get_token()
+
+
+# read csv file
+df = pd.read_csv('train.csv')
+
+# only use relavent cols
+relevant_cols = [
+    'track_id', 'artists', 'track_name', 'popularity', 'duration_ms',
+    'danceability', 'energy', 'loudness', 'instrumentalness',
+    'valence', 'tempo', 'track_genre'
+]
+df2 = df[relevant_cols].copy()
+
+# get user input for mood
+mood_input = input("Rate your mood (1-10): ")
+
+# mood ranges for valence, energy, and dancabiliity
+# may need to broaden ranges if not enough songs meet criteria
+mood_ranges = {
+    1: (0, 0.1),
+    2: (0.1, 0.2),
+    3: (0.2, 0.3),
+    4: (0.3, 0.4),
+    5: (0.4, 0.5),
+    6: (0.5, 0.6),
+    7: (0.6, 0.7),
+    8: (0.7, 0.8),
+    9: (0.8, 0.9),
+    10: (0.9, 1)
+}
+
+# mood range for tempo
+min_tempo = df2['tempo'].min()
+max_tempo = df2['tempo'].max()
+tempo_step = (max_tempo - min_tempo) / 10
+
+tempo_ranges = {}
+for i in range(1, 11):
+    lower = min_tempo + (i - 1) * tempo_step
+    upper = min_tempo + i * tempo_step
+    tempo_ranges[i] = (lower, upper)
+    
+print(tempo_ranges)
