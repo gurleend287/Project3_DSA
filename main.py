@@ -106,14 +106,16 @@ cols1 = ['valence', 'tempo']
 for i, row in df2.iloc[:len(df2)//2].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
-    graph.add_node(curr_node, cols1)
+    if(graph.size < 250):
+        graph.add_node(curr_node, cols1)
 
 # parse through second half of dataset
 # add nodes based on all 4 criteria
 for i, row in df2.iloc[len(df2)//2:].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
-    graph.add_node(curr_node, criteria)
+    if(graph.size < 250):
+        graph.add_node(curr_node, criteria)
     
 # add edges between nodes
 keys = list(graph.adj_list.keys())

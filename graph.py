@@ -5,6 +5,7 @@ class Graph:
     def __init__(self, threshold_map):
         self.adj_list = {}
         self.threshold_map = threshold_map
+        self.size=0; 
     
     # helper function
     # returns similarity score used to determine if two nodes should be connected
@@ -40,3 +41,4 @@ class Graph:
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
+        self.size+=1
