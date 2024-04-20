@@ -1,5 +1,7 @@
 from node import Node
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import deque
+
 
 class Graph:
     def __init__(self, threshold_map):
@@ -47,25 +49,53 @@ class Graph:
     def dfs_traversal(self, start_node: Node):
         dfs_vector= [] #store the nodes traversal order here
 
-        visited = set() #stores visited nodes 
-        stack = [] #keep the order of nodes to visit
+        # broken code, revisit later
+        # visited = set() #stores visited nodes 
+        # stack = [start_node] #keep the order of nodes to visit
 
-        #start off with the source node 
-        visted.append(start_node)
-        stack.append(start_node)
+        # #start off with the source node 
+        # visited.add(start_node.track_id)
+        
+        # while stack:
+        #     #u=stack[-1] #check top of the stack
+        #     #dfs_vector.append(u)
+        #     u=stack.pop()
+        #     dfs_vector.append(u)
+        #     print(u)
+        
+        #     neighbors = self.adj_list[(u)]
 
+        #     for x in neighbors:
+        #         if x not in visited:
+        #             visited.add(x[1])
+        #             stack.append(x)
+
+        visited = set() # stored in a set to have once only 
+        stack = [start_node] # stack is primary structure for dfs 
         
         while stack:
-            u=stack[-1]
-            dfs_vector.append(u)
-            stack.pop()
+            current_node = stack.pop()
+            
+            if current_node.track_id not in visited:
+                visited.add(current_node.track_id)
+                
+                for neighbor, _ in self.adj_list[(current_node.track_id, current_node)]:
+                    stack.append(neighbor[1])
 
-            neighbors=adj_list[u.track_id]
-            for(song: neighbors):
-                if(visited.count(song.track_id) ==0)
-                    visited.append(song)
-                    stack.append(song)
-        
+         # prints out in dfs order            
+        for track_id in visited:
+                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
+                if node:
+                    dfs_vector.append(node)
+
+        return dfs_vector
+
+    def dfs_print(self, start_node: Node):
+        dfs_vector= self.dfs_traversal(start_node)
+        for song in dfs_vector:
+             print(f"{song.track_name} - {song.artists}")
+
+
 
 
             

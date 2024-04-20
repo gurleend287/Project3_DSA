@@ -100,12 +100,17 @@ graph = Graph(threshold_map)
 # print(adj_list)
 num1 = 0
 
+#keep track of the first node that gets added 
+first_node = None
+
 # parse through first half of dataset
 # add nodes based on tempo and valence only
 cols1 = ['valence', 'tempo']
 for i, row in df2.iloc[:len(df2)//2].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
+    if (graph.size== 0):
+        first_node= curr_node
     if(graph.size < 250):
         graph.add_node(curr_node, cols1)
 
@@ -149,5 +154,9 @@ print(max_sim)
     
 print(num1)
 print(len(graph.adj_list))
+
+print("------------------------------------------")
+print(first_node.track_name)
+graph.dfs_print(first_node)
 
 
