@@ -1,5 +1,7 @@
 from node import Node
 from sklearn.metrics.pairwise import cosine_similarity
+from collections import deque
+
 
 class Graph:
     def __init__(self, threshold_map):
@@ -41,8 +43,59 @@ class Graph:
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
-        self.size+=1
-    # searches through nodes using bfs algorithm     
+        self.size+=1 #update the size of graph
+    
+    #traverse depth first (code sourced from powerpoint 8a)
+    def dfs_traversal(self, start_node: Node):
+        dfs_vector= [] #store the nodes traversal order here
+
+        # broken code, revisit later
+        # visited = set() #stores visited nodes 
+        # stack = [start_node] #keep the order of nodes to visit
+
+        # #start off with the source node 
+        # visited.add(start_node.track_id)
+        
+        # while stack:
+        #     #u=stack[-1] #check top of the stack
+        #     #dfs_vector.append(u)
+        #     u=stack.pop()
+        #     dfs_vector.append(u)
+        #     print(u)
+        
+        #     neighbors = self.adj_list[(u)]
+
+        #     for x in neighbors:
+        #         if x not in visited:
+        #             visited.add(x[1])
+        #             stack.append(x)
+
+        visited = set() # stored in a set to have once only 
+        stack = [start_node] # stack is primary structure for dfs 
+        
+        while stack:
+            current_node = stack.pop()
+            
+            if current_node.track_id not in visited:
+                visited.add(current_node.track_id)
+                
+                for neighbor, _ in self.adj_list[(current_node.track_id, current_node)]:
+                    stack.append(neighbor[1])
+
+         # prints out in dfs order            
+        for track_id in visited:
+                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
+                if node:
+                    dfs_vector.append(node)
+
+        return dfs_vector
+        
+    def dfs_print(self, start_node: Node):
+        dfs_vector= self.dfs_traversal(start_node)
+        for song in dfs_vector:
+             print(f"{song.track_name} - {song.artists}")
+
+     # searches through nodes using bfs algorithm     
     def bfs(self, start_node: Node):
         visited = set() # stored in a set to have once only 
         queue = deque([start_node])
