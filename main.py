@@ -151,3 +151,7 @@ print(num1)
 print(len(graph.adj_list))
 
 
+start_node = next(iter(graph.adj_list.keys()))[1]
+
+print("BFS Traversal:")
+graph.bfs(start_node)
