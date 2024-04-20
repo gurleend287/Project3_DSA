@@ -41,4 +41,32 @@ class Graph:
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
-        self.size+=1
+        self.size+=1 #update the size of graph
+    
+    #traverse depth first (code sourced from powerpoint 8a)
+    def dfs_traversal(self, start_node: Node):
+        dfs_vector= [] #store the nodes traversal order here
+
+        visited = set() #stores visited nodes 
+        stack = [] #keep the order of nodes to visit
+
+        #start off with the source node 
+        visted.append(start_node)
+        stack.append(start_node)
+
+        
+        while stack:
+            u=stack[-1]
+            dfs_vector.append(u)
+            stack.pop()
+
+            neighbors=adj_list[u.track_id]
+            for(song: neighbors):
+                if(visited.count(song.track_id) ==0)
+                    visited.append(song)
+                    stack.append(song)
+        
+
+
+            
+
