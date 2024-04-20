@@ -42,3 +42,21 @@ class Graph:
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
         self.size+=1
+    # searches through nodes using bfs algorithm     
+    def bfs(self, start_node: Node):
+        visited = set() # stored in a set to have once only 
+        queue = deque([start_node])
+        
+        while queue:
+            current_node = queue.popleft()
+            
+            if current_node.track_id not in visited:
+                visited.add(current_node.track_id)
+                
+                for neighbor, _ in self.adj_list[(current_node.track_id, current_node)]:
+                    queue.append(neighbor[1])
+         # prints out in bfs order            
+        for track_id in visited:
+                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
+                if node:
+                    print(f"{node.track_name} - {node.artists}")
