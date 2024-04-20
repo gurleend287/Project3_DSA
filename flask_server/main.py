@@ -150,4 +150,8 @@ print(max_sim)
 print(num1)
 print(len(graph.adj_list))
 
+# testing bfs 
+start_node = next(iter(graph.adj_list.keys()))[1]
 
+print("BFS Traversal:")
+graph.bfs(start_node)
