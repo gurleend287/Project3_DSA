@@ -114,7 +114,7 @@ for i, row in df2.iloc[:len(df2)//2].iterrows():
 for i, row in df2.iloc[len(df2)//2:].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
-    if(graph.size < 250):
+    if(graph.size < 250): #ensure graph does not exceed size of max playlist
         graph.add_node(curr_node, criteria)
     
 # add edges between nodes
