@@ -89,7 +89,7 @@ class Graph:
                     dfs_vector.append(node)
 
         return dfs_vector
-
+        
     def dfs_print(self, start_node: Node):
         dfs_vector= self.dfs_traversal(start_node)
         for song in dfs_vector:
