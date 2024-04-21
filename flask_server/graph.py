@@ -97,6 +97,7 @@ class Graph:
 
      # searches through nodes using bfs algorithm     
     def bfs(self, start_node: Node):
+        bfs_vector = []
         visited = set() # stored in a set to have once only 
         queue = deque([start_node])
         
@@ -112,4 +113,9 @@ class Graph:
         for track_id in visited:
                 node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
                 if node:
-                    print(f"{node.track_name} - {node.artists}")
+                    bfs_vector.append(node)
+        return bfs_vector
+    def bfs_print(self, start_node: Node):
+        bfs_vector = self.bfs_traversal(start_node)
+        for song in bfs_vector:
+            print(f"{song.track_name} - {song.artists}")
