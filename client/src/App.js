@@ -1,5 +1,7 @@
 import React, { useState, useEffect} from 'react'
 
+import './App.css';
+
 function App() {
 
   const [data, setData] = useState ([{}]) 
@@ -21,7 +23,10 @@ function App() {
         <p>Loading...</p>
     ) : (
         data.members.map((member, i) => (
-            <p key={i}>{member}</p>
+            <p key={i}>
+                style={{ backgroundColor: 'blue', padding: '10px' }}
+                {member}
+            </p>
         ))
     )}
  </div>
