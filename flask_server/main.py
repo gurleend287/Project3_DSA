@@ -6,6 +6,7 @@ from requests import post
 import pandas as pd
 from node import Node
 from graph import Graph
+from flaskserver import server
 
 # loads environment variable files
 load_dotenv()
@@ -164,3 +165,5 @@ start_node = next(iter(graph.adj_list.keys()))[1]
 
 print("BFS Traversal:")
 graph.bfs(start_node)
+
+("----7777777777--------------------------------------")
