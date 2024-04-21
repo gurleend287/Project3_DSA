@@ -155,15 +155,12 @@ print(max_sim)
 print(num1)
 print(len(graph.adj_list))
 
-<<<<<<< HEAD
 print("------------------------------------------")
 print(first_node.track_name)
 graph.dfs_print(first_node)
 
-=======
 # testing bfs 
 start_node = next(iter(graph.adj_list.keys()))[1]
->>>>>>> ce2e412537c2985ffe535b2490f2f6e0fc83e51e
 
 print("BFS Traversal:")
 graph.bfs(start_node)
