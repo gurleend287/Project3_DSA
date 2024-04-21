@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Input, Button } from 'semantic-ui-react'; // Import Input and Button from Semantic UI React
+import { Button, Rating } from 'semantic-ui-react';
 import './App.css';
 
 function App() {
   const [data, setData] = useState({});
-  const [inputValue, setInputValue] = useState('');
+  const [rating, setRating] = useState(0);
   const [response, setResponse] = useState('');
 
   // Fetch initial data from Flask API
@@ -22,12 +22,12 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/send_input', {
+      const response = await fetch('/send_rating', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ input: inputValue })
+        body: JSON.stringify({ rating: rating })
       });
 
       const responseData = await response.json();
@@ -38,19 +38,30 @@ function App() {
   };
 
   return (
-    <div>
-      {/* Input Box */}
-      <Input
-        placeholder="Enter your input"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-        action={
-          <Button
-            content="Submit"
-            primary
-            onClick={handleSubmit}
-          />
-        }
+    <div className="App">
+      {/* Rating Component */}
+      <div>
+        <label>Rating: {rating}</label>
+        <input
+          type='range'
+          min={0}
+          max={5}
+          value={rating}
+          onChange={(e) => setRating(parseInt(e.target.value, 10))}
+        />
+        <Rating 
+          icon='star' 
+          maxRating={5} 
+          rating={rating} 
+          onRate={(e, { rating }) => setRating(rating)} 
+        />
+      </div>
+
+      {/* Submit Rating Button */}
+      <Button 
+        content="Submit Rating" 
+        primary 
+        onClick={handleSubmit} 
       />
 
       {/* Display Response */}
@@ -60,11 +71,14 @@ function App() {
       {typeof data.members === 'undefined' ? (
         <p>Loading...</p>
       ) : (
-        data.members.map((member, i) => (
-          <p key={i} style={{ backgroundColor: 'blue', padding: '10px' }}>
-            {member}
-          </p>
-        ))
+        <div>
+          <h3>Members:</h3>
+          {data.members.map((member, i) => (
+            <p key={i} style={{ backgroundColor: 'blue', padding: '10px' }}>
+              {member}
+            </p>
+          ))}
+        </div>
       )}
     </div>
   );
