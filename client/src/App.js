@@ -95,7 +95,7 @@ function App() {
 
       {/* Radio Button Options */}
       <Form.Group inline>
-        <label>Select a search algorithm (1-BFS or 2-DFS):</label>
+        <label>Select a search algorithm:</label>
         <Form.Field
           control={Radio}
           label='BFS'

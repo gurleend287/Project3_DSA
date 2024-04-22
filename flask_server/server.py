@@ -3,11 +3,6 @@ import playlist
 
 app = Flask(__name__)
 
-@app.route("/members")
-def members():
-    return "bobita"
-    #return{"members": ["Member1", "Member2", "Member3"]}
-
 @app.route("/send_rating", methods=['POST'])
 def receive_rating():
     data = request.get_json()
@@ -41,7 +36,7 @@ def receive_rating():
     # may need to broaden ranges/overlap if not enough songs meet criteria
     ranges_map = playlist.criteria_ranges(df, criteria, num_ranges=5)
     
-    # user input
+    # user input - command line
     # mood_input, playlist_size, search_input = playlist.get_user_input()
 
     # thesholds based on mood input
@@ -51,6 +46,15 @@ def receive_rating():
 
     # creates csv files based on search algo chosen
     playlist.perform_search(graph, search_input)
+
+    # averages stats for playlist
+    if (search_input == 1):
+        file_name = 'bfs.csv'
+    elif (search_input == 2):
+        file_name = 'dfs.csv'
+    average_cols = ['danceability', 'energy', 'valence', 'tempo', 'loudness', 'instrumentalness']
+    # returns dict of averages
+    average_dict = playlist.average_val(file_name, average_cols, playlist_size)
 
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
