@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Rating, Form, Radio } from 'semantic-ui-react';
+import { Button, Rating, Form, Radio, List } from 'semantic-ui-react';
 import './App.css';
 
 function App() {
@@ -8,6 +8,7 @@ function App() {
   const [textInput, setTextInput] = useState('');
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
+  const [csvData, setCsvData] = useState([]);
 
   // Fetch initial data from Flask API
   useEffect(() => {
@@ -38,8 +39,29 @@ function App() {
 
       const responseData = await response.json();
       setResponse(responseData.response);
+
     } catch (error) {
       console.error('Error:', error);
+    }
+  };
+
+  const handleFetchCsvData = async () => {
+    try {
+      let filename;
+      if (radioOption === "option2") {
+        filename = "dfs.csv";
+      }
+
+      if (radioOption === "option1") {
+        filename = "bfs.csv";
+      }
+
+      const csvResponse = await fetch(`/get_csv_data?file_name=${filename}`);
+      const csvData = await csvResponse.json();
+      setCsvData(csvData);
+
+    } catch (error) {
+      console.error('Error fetching CSV data:', error);
     }
   };
 
@@ -65,7 +87,7 @@ function App() {
 
       {/* Text Input */}
       <Form.Input
-        label='Text Input'
+        label='Enter Playlist Size (1-100)'
         placeholder='Enter text'
         value={textInput}
         onChange={(e) => setTextInput(e.target.value)}
@@ -73,17 +95,17 @@ function App() {
 
       {/* Radio Button Options */}
       <Form.Group inline>
-        <label>Radio Options:</label>
+        <label>Select a search algorithm (1-BFS or 2-DFS):</label>
         <Form.Field
           control={Radio}
-          label='Option 1'
+          label='BFS'
           value='option1'
           checked={radioOption === 'option1'}
           onChange={() => setRadioOption('option1')}
         />
         <Form.Field
           control={Radio}
-          label='Option 2'
+          label='DFS'
           value='option2'
           checked={radioOption === 'option2'}
           onChange={() => setRadioOption('option2')}
@@ -92,9 +114,17 @@ function App() {
 
       {/* Submit Rating Button */}
       <Button 
-        content="Submit Rating" 
+        content="Submit my Mood" 
         primary 
         onClick={handleSubmit} 
+      />
+
+      {/* Fetch CSV Data Button */}
+      <Button 
+        content="Get my Playlist" 
+        color="teal" 
+        onClick={handleFetchCsvData} 
+        style={{ marginTop: '20px' }}  // Add some margin at the top
       />
 
       {/* Display Response */}
@@ -107,12 +137,25 @@ function App() {
         <div>
           <h3>Members:</h3>
           {data.members.map((member, i) => (
-            <p key={i} style={{ backgroundColor: 'blue', padding: '10px' }}>
+            <p key={i} style={{ backgroundColor: 'white', padding: '10px' }}>
               {member}
             </p>
           ))}
         </div>
       )}
+
+        <List divided relaxed>
+        {csvData.slice(0, textInput).map((row, index) => (  // Limit the displayed rows based on count
+            <List.Item key={index}>
+            <List.Content>
+                <List.Header>{`Song ${index + 1}`}</List.Header>
+                <List.Description>
+                {row.join(', ')} {/* Join the row elements with a comma and space */}
+                </List.Description>
+            </List.Content>
+            </List.Item>
+        ))}
+        </List>
     </div>
   );
 }

@@ -52,11 +52,19 @@ def receive_rating():
     # creates csv files based on search algo chosen
     playlist.perform_search(graph, search_input)
 
-
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
 
     return jsonify({'response': response})
+
+@app.route('/get_csv_data')
+def get_csv_data():
+    # Read the CSV file here
+    filename = request.args.get('file_name')
+    # For this example, I'm assuming dfs.csv and bfs.csv are in the same directory
+    with open(filename, 'r') as file:
+        data = [line.strip().split(',') for line in file.readlines()]
+    return jsonify(data)
 
 
 if __name__ == "__main__":

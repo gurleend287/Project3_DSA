@@ -6,7 +6,7 @@ from node import Node
 # read and process csv file into df
 def process_data():
     # read csv file
-    df = pd.read_csv('/Users/shravyasama/Downloads/Project3_DSA/train.csv')
+    df = pd.read_csv('../train.csv')
 
     # only use relavent cols
     relevant_cols = [
@@ -60,14 +60,14 @@ def build_graph(df, playlist_size: int, criteria: list[str], threshold_map: dict
     cols1 = ['valence', 'tempo']
     for i, row in df.iloc[:len(df)//2].iterrows():
         curr_node = Node(**row.to_dict())
-        if(graph.size < playlist_size):
+        if(graph.size < 250):
             graph.add_node(curr_node, cols1)
 
     # parse through second half of dataset
     # add nodes based on all 4 criteria
     for i, row in df.iloc[len(df)//2:].iterrows():
         curr_node = Node(**row.to_dict())
-        if(graph.size < playlist_size): # ensure graph does not exceed size of max playlist
+        if(graph.size < 250): # ensure graph does not exceed size of max playlist
             graph.add_node(curr_node, criteria)
     
     # add edges between nodes
