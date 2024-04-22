@@ -1,6 +1,8 @@
 from node import Node
 from sklearn.metrics.pairwise import cosine_similarity
 from collections import deque
+import csv
+import os
 
 
 class Graph:
@@ -8,6 +10,7 @@ class Graph:
         self.adj_list = {}
         self.threshold_map = threshold_map
         self.size=0; 
+        self.num = 0
     
     # helper function
     # returns similarity score used to determine if two nodes should be connected
@@ -24,8 +27,11 @@ class Graph:
     # add edge between nodes if similarity score theshold is met
     # similary score is weight of edge
     def add_edge(self, node1: Node, node2: Node):
+        # avoid adding edge from a node to itself
+        if node1.track_id.strip().lower() == node2.track_id.strip().lower():
+            return
+        
         sim_score = self.find_similarity(node1, node2)
-        # print(sim_score)
         # getting high similarity scores for most nodes
         # 0.9999995 is good threshold for sparse graph - obtained through trial and error
         if sim_score >= 0.9999995:
@@ -43,73 +49,47 @@ class Graph:
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
-        self.size+=1 #update the size of graph
-    
-    #traverse depth first (code sourced from powerpoint 8a)
-    def dfs_traversal(self, start_node: Node):
-        dfs_vector= [] #store the nodes traversal order here
+        self.size += 1 #update the size of graph
 
-        # broken code, revisit later
-        # visited = set() #stores visited nodes 
-        # stack = [start_node] #keep the order of nodes to visit
+    # depth first traversal
+    def dfs(self, start: Node, visited=None, out_file="dfs.csv"):
+        if visited is None:
+            visited = set()
 
-        # #start off with the source node 
-        # visited.add(start_node.track_id)
-        
-        # while stack:
-        #     #u=stack[-1] #check top of the stack
-        #     #dfs_vector.append(u)
-        #     u=stack.pop()
-        #     dfs_vector.append(u)
-        #     print(u)
-        
-        #     neighbors = self.adj_list[(u)]
+        visited.add(start.track_id)
 
-        #     for x in neighbors:
-        #         if x not in visited:
-        #             visited.add(x[1])
-        #             stack.append(x)
+        # create new csv file with the following:
+        # track_id, popularity, duration_ms, danceability, energy, loudness, intrumentalness, valence, tempo, track_genre
+        with open(out_file, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow([start.track_id, start.popularity, start.duration_ms, start.danceability,
+                             start.energy, start.loudness, start.instrumentalness, start.valence, start.tempo, start.track_genre])
 
+        for neighbor, _ in self.adj_list.get((start.track_id, start), []):
+            neighbor_node = neighbor[1]
+            if neighbor_node.track_id not in visited:
+                self.dfs(neighbor_node, visited)
+
+    # breath first traversal    
+    def bfs(self, start: Node, out_file="bfs.csv"):
         visited = set() # stored in a set to have once only 
-        stack = [start_node] # stack is primary structure for dfs 
-        
-        while stack:
-            current_node = stack.pop()
-            
-            if current_node.track_id not in visited:
-                visited.add(current_node.track_id)
-                
-                for neighbor, _ in self.adj_list[(current_node.track_id, current_node)]:
-                    stack.append(neighbor[1])
+        queue = deque([start])
 
-         # prints out in dfs order            
-        for track_id in visited:
-                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
-                if node:
-                    dfs_vector.append(node)
-
-        return dfs_vector
-        
-    def dfs_print(self, start_node: Node):
-        dfs_vector= self.dfs_traversal(start_node)
-        for song in dfs_vector:
-             print(f"{song.track_name} - {song.artists}")
-
-     # searches through nodes using bfs algorithm     
-    def bfs(self, start_node: Node):
-        visited = set() # stored in a set to have once only 
-        queue = deque([start_node])
+        # remove existing file
+        if os.path.exists("bfs.csv"):
+            os.remove("bfs.csv")
         
         while queue:
-            current_node = queue.popleft()
+            start = queue.popleft()
             
-            if current_node.track_id not in visited:
-                visited.add(current_node.track_id)
+            if start.track_id not in visited:
+                visited.add(start.track_id)
+
+                # write data to csv file
+                with open(out_file, mode='a', newline='') as file:
+                    writer = csv.writer(file)
+                    writer.writerow([start.track_id, start.popularity, start.duration_ms, start.danceability,
+                                     start.energy, start.loudness, start.instrumentalness, start.valence, start.tempo, start.track_genre])
                 
-                for neighbor, _ in self.adj_list[(current_node.track_id, current_node)]:
+                for neighbor, _ in self.adj_list[(start.track_id, start)]:
                     queue.append(neighbor[1])
-         # prints out in bfs order            
-        for track_id in visited:
-                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
-                if node:
-                    print(f"{node.track_name} - {node.artists}")
