@@ -115,8 +115,9 @@ class Graph:
                 if node:
                     bfs_vector.append(node)
         return bfs_vector
+
     def bfs_print(self, start_node: Node):
-        bfs_vector = self.bfs_traversal(start_node)
+        bfs_vector = self.bfs(start_node)
         for song in bfs_vector:
             print(f"{song.track_name} - {song.artists}")
 

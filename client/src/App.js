@@ -22,13 +22,13 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('/send_rating', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ rating: rating })
-      });
+        const response = await fetch('/send_rating', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ rating: rating })
+        });
 
       const responseData = await response.json();
       setResponse(responseData.response);
