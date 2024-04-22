@@ -1,10 +1,22 @@
 from flask import Flask, request, jsonify
 import playlist
+import pandas as pd
+import api
+from dotenv import load_dotenv
+import os
 
 app = Flask(__name__)
 
 @app.route("/send_rating", methods=['POST'])
 def receive_rating():
+    # loads environment variable files
+    load_dotenv()
+
+    client_id = os.getenv("CLIENT_ID")
+    client_secret = os.getenv("CLIENT_SECRET")
+
+    token = api.get_token(client_id, client_secret)
+
     data = request.get_json()
     rating = data.get('rating')
     textInput = data.get('textInput')
@@ -55,6 +67,12 @@ def receive_rating():
     average_cols = ['danceability', 'energy', 'valence', 'tempo', 'loudness', 'instrumentalness']
     # returns dict of averages
     average_dict = playlist.average_val(file_name, average_cols, playlist_size)
+    
+    # build playlist df baed on input
+    playlist_df = pd.read_csv(file_name)
+
+    # add track details
+    playlist_df = playlist.add_track_details(playlist_df, playlist_size, token)
 
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
