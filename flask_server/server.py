@@ -56,7 +56,7 @@ def receive_rating():
     print(threshold_map)
 
     combined_metric = {}
-
+ 
     for metric, bounds in threshold_map.items():
         lower_bound, upper_bound = bounds
         avg_metric = (lower_bound + upper_bound) / 2

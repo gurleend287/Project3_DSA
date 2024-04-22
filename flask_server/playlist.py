@@ -8,7 +8,7 @@ import api
 # read and process csv file into df
 def process_data():
     # read csv file
-    df = pd.read_csv('train.csv')
+    df = pd.read_csv('../train.csv')
 
     # only use relavent cols
     relevant_cols = [
