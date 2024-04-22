@@ -12,9 +12,9 @@ A common issue many music listeners have is finding a playlist curated solely ba
 ## Contributors 
 Team Members + Github user names: 
 
-Gayatri Baskaran - bgayatri3
-Gurleen Dhillon - gurleen287
-Shravya Sama - shravbot
+- Gayatri Baskaran - bgayatri3
+- Gurleen Dhillon - gurleen287
+- Shravya Sama - shrav-bot
 
 ## Running the Project Locally 
 
