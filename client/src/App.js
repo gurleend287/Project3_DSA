@@ -151,7 +151,7 @@ function App() {
         <div className="card" key={index}>
         <img src={row[0]} alt="Track cover" className="image" />
         <Card.Description className="card-description">
-            {row.slice(1).join(', ')}
+            {row[1]} - {row[2]}  
         </Card.Description>
         </div>
     ))}
