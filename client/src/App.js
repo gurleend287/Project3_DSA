@@ -6,7 +6,7 @@ import GraphVisualization from './GraphVisualization';
 function App() {
   const [data, setData] = useState({});
   const [rating, setRating] = useState(0);
-  const [textInput, setTextInput] = useState('');
+  const [textInput, setTextInput] = useState(''); 
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);

@@ -78,6 +78,12 @@ class Graph:
         # remove existing file
         if os.path.exists("bfs.csv"):
             os.remove("bfs.csv")
+
+        # write header to new csv file
+        with open(out_file, mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['track_id', 'popularity', 'duration_ms', 'danceability',
+                             'energy', 'loudness', 'instrumentalness', 'valence', 'tempo', 'track_genre'])
         
         while queue:
             start = queue.popleft()
