@@ -122,7 +122,10 @@ def add_track_details(df, playlist_size: int, token):
     track_urls = []
     artists = []
 
-    for track_id in df['track_id'].head(playlist_size):
+    # filter out first playlist_size data points
+    df = df.head(playlist_size).copy()
+
+    for track_id in df['track_id']:
         # get track details using api
         image_url, track_name, track_url, artist = api.get_track_details(token, track_id)
         
@@ -132,10 +135,10 @@ def add_track_details(df, playlist_size: int, token):
         artists.append(artist)
 
     # add to df
-    df['track_image_url'] = image_urls
-    df['track_name'] = track_names
-    df['track_url'] = track_urls
-    df['artists'] = artists
+    df.loc[:, 'track_image_url'] = image_urls
+    df.loc[:, 'track_name'] = track_names
+    df.loc[:, 'track_url'] = track_urls
+    df.loc[:, 'artists'] = artists
 
     return df
         
