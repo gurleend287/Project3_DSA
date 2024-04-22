@@ -10,33 +10,6 @@ function App() {
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
-  const [graphData, setGraphData] = useState(null);
-
-  useEffect(() => {
-    const fetchGraphData = async () => {
-      try {
-        const response = await fetch('/get_graph_data'); // Update the endpoint as per your backend
-        const data = await response.json();
-        setGraphData(data);
-      } catch (error) {
-        console.error('Error fetching graph data:', error);
-      }
-    };
-
-    fetchGraphData();
-  }, []);
-
-  useEffect(() => {
-    fetch("/members")
-      .then(res => res.json())
-      .then(data => {
-        setData(data);
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
 
   const handleSubmit = async () => {
     try {
@@ -62,16 +35,7 @@ function App() {
 
   const handleFetchCsvData = async () => {
     try {
-      let filename;
-      if (radioOption === "option2") {
-        filename = "dfs.csv";
-      }
-
-      if (radioOption === "option1") {
-        filename = "bfs.csv";
-      }
-
-      const csvResponse = await fetch(`/get_csv_data?file_name=${filename}`);
+      const csvResponse = await fetch(`/get_csv_data`);
       const csvData = await csvResponse.json();
       setCsvData(csvData);
 
@@ -79,6 +43,17 @@ function App() {
       console.error('Error fetching CSV data:', error);
     }
   };
+
+
+  const handleGetPlaylist = async () => {
+    try {
+      await handleSubmit(); // wait for handleSubmit to finish
+      await handleFetchCsvData(); // fetch after handleSubmit finishes
+    } catch (error) {
+      console.error('Error fetching playlist data:', error);
+    }
+  };
+
 
   return (
     <div className="App">
@@ -108,11 +83,11 @@ function App() {
           value={rating}
           onChange={(e) => setRating(parseInt(e.target.value, 10))}
         />
-        <Rating 
-          icon='star' 
-          maxRating={5} 
-          rating={rating} 
-          onRate={(e, { rating }) => setRating(rating)} 
+        <Rating
+          icon='star'
+          maxRating={5}
+          rating={rating}
+          onRate={(e, { rating }) => setRating(rating)}
         />
       </div>
 
@@ -143,24 +118,13 @@ function App() {
         />
       </Form.Group>
 
-      {/* Button Container */}
-      <div className="button-container">
-        {/* Submit Rating Button */}
-        <Button 
-          content="Submit my Mood" 
-          primary 
-          onClick={handleSubmit} 
-          className="button"
-        />
-
-        {/* Fetch CSV Data Button */}
-        <Button 
-          content="Get my Playlist" 
-          color="teal" 
-          onClick={handleFetchCsvData} 
-          className="button"
-        />
-      </div>
+      {/* Fetch CSV Data Button */}
+      <Button
+        content="Get my Playlist"
+        color="teal"
+        onClick={handleGetPlaylist}
+        style={{ marginTop: '20px' }}  // Add some margin at the top
+      />
 
       {/* Display Response */}
       {response && <p>Playlist below!</p>}
@@ -191,8 +155,7 @@ function App() {
           </List.Item>
         ))}
       </List>
-      {graphData && <GraphVisualization graphData={graphData} />} {/* Render GraphVisualization component */}
-    </div>
+    </div >
   );
 }
 

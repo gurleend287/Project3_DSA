@@ -67,12 +67,19 @@ def receive_rating():
     average_cols = ['danceability', 'energy', 'valence', 'tempo', 'loudness', 'instrumentalness']
     # returns dict of averages
     average_dict = playlist.average_val(file_name, average_cols, playlist_size)
-    
-    # build playlist df baed on input
+
+    # build playlist df based on input
     playlist_df = pd.read_csv(file_name)
 
     # add track details
     playlist_df = playlist.add_track_details(playlist_df, playlist_size, token)
+
+    # remove existing file
+    if os.path.exists("final_playlist.csv"):
+        os.remove("final_playlist.csv")
+
+    # write csv file for playlist
+    playlist_df.to_csv('final_playlist.csv', index=False)
 
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
@@ -81,10 +88,7 @@ def receive_rating():
 
 @app.route('/get_csv_data')
 def get_csv_data():
-    # Read the CSV file here
-    filename = request.args.get('file_name')
-    # For this example, I'm assuming dfs.csv and bfs.csv are in the same directory
-    with open(filename, 'r') as file:
+    with open('final_playlist.csv', 'r') as file:
         data = [line.strip().split(',') for line in file.readlines()]
     return jsonify(data)
 
