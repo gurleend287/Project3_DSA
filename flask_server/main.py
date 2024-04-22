@@ -6,7 +6,7 @@ from requests import post
 import pandas as pd
 from node import Node
 from graph import Graph
-from flaskserver import server
+from server import server
 
 # loads environment variable files
 load_dotenv()

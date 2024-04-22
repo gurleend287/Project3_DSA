@@ -29,13 +29,13 @@ function App() {
         },
         body: JSON.stringify({ rating: rating })
       });
-
+  
       const responseData = await response.json();
       setResponse(responseData.response);
     } catch (error) {
       console.error('Error:', error);
     }
-  };
+  };  
 
   return (
     <div className="App">
