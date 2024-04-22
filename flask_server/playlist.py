@@ -91,23 +91,3 @@ def perform_search(graph: Graph, search_input: int):
         if os.path.exists("dfs.csv"):
             os.remove("dfs.csv")
         graph.dfs(start_node)
-
-def main():
-    df = process_data()
-    criteria = ['danceability', 'energy', 'valence', 'tempo']
-
-    # mood ranges for valence, energy, dancabiliity, and tempo
-    # may need to broaden ranges/overlap if not enough songs meet criteria
-    ranges_map = criteria_ranges(df, criteria, num_ranges=5)
-    
-    # user input
-    mood_input, playlist_size, search_input = get_user_input()
-
-    # thesholds based on mood input
-    threshold_map = define_thesholds(ranges_map, mood_input)
-
-    graph = build_graph(df, playlist_size, criteria, threshold_map)
-    perform_search(graph, search_input)
-
-if __name__ == "__main__":
-    main()
