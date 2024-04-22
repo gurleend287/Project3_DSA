@@ -10,7 +10,6 @@ function App() {
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
 
-  // Fetch initial data from Flask API
   useEffect(() => {
     fetch("/members")
       .then(res => res.json())
@@ -67,12 +66,28 @@ function App() {
 
   return (
     <div className="App">
+      {/* Website Header */}
+      <header className="App-header">
+        <h1> Playlist Creator </h1>
+      </header>
+
       {/* Rating Component */}
       <div>
-        <label>Rating: {rating}</label>
+        {/* Rating Descriptions */}
+        <div className="rating-descriptions">
+        <p>
+          Moods: <br />
+          1 - Super Sad<br />
+          2 - Sad<br />
+          3 - Neutral<br />
+          4 - Happy<br />
+          5 - Super Happy
+        </p>
+        </div>
+        <label>Rate your mood: {rating}</label>
         <input
           type='range'
-          min={0}
+          min={1}
           max={5}
           value={rating}
           onChange={(e) => setRating(parseInt(e.target.value, 10))}
@@ -95,7 +110,7 @@ function App() {
 
       {/* Radio Button Options */}
       <Form.Group inline>
-        <label>Select a search algorithm (1-BFS or 2-DFS):</label>
+        <label>Select a search algorithm (Breath-First Search or Depth-First Search):</label>
         <Form.Field
           control={Radio}
           label='BFS'
@@ -112,20 +127,24 @@ function App() {
         />
       </Form.Group>
 
-      {/* Submit Rating Button */}
-      <Button 
-        content="Submit my Mood" 
-        primary 
-        onClick={handleSubmit} 
-      />
+      {/* Button Container */}
+      <div className="button-container">
+        {/* Submit Rating Button */}
+        <Button 
+          content="Submit my Mood" 
+          primary 
+          onClick={handleSubmit} 
+          className="button"
+        />
 
-      {/* Fetch CSV Data Button */}
-      <Button 
-        content="Get my Playlist" 
-        color="teal" 
-        onClick={handleFetchCsvData} 
-        style={{ marginTop: '20px' }}  // Add some margin at the top
-      />
+        {/* Fetch CSV Data Button */}
+        <Button 
+          content="Get my Playlist" 
+          color="teal" 
+          onClick={handleFetchCsvData} 
+          className="button"
+        />
+      </div>
 
       {/* Display Response */}
       {response && <p>Playlist below!</p>}
@@ -144,18 +163,18 @@ function App() {
         </div>
       )}
 
-        <List divided relaxed>
-        {csvData.slice(0, textInput).map((row, index) => (  // Limit the displayed rows based on count
-            <List.Item key={index}>
+      <List divided relaxed>
+        {csvData.slice(0, textInput).map((row, index) => (
+          <List.Item key={index}>
             <List.Content>
-                <List.Header>{`Song ${index + 1}`}</List.Header>
-                <List.Description>
-                {row.join(', ')} {/* Join the row elements with a comma and space */}
-                </List.Description>
+              <List.Header>{`Song ${index + 1}`}</List.Header>
+              <List.Description>
+                {row.join(', ')}
+              </List.Description>
             </List.Content>
-            </List.Item>
+          </List.Item>
         ))}
-        </List>
+      </List>
     </div>
   );
 }
