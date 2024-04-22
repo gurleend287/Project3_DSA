@@ -10,19 +10,6 @@ function App() {
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
 
-  // Fetch initial data from Flask API
-  useEffect(() => {
-    fetch("/members")
-      .then(res => res.json())
-      .then(data => {
-        setData(data);
-        console.log(data);
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
   const handleSubmit = async () => {
     try {
       const response = await fetch('/send_rating', {
@@ -65,6 +52,17 @@ function App() {
     }
   };
 
+
+  const handleGetPlaylist = async () => {
+    try {
+      await handleSubmit(); // wait for handleSubmit to finish
+      await handleFetchCsvData(); // fetch after handleSubmit finishes
+    } catch (error) {
+      console.error('Error fetching playlist data:', error);
+    }
+  };
+
+
   return (
     <div className="App">
       {/* Rating Component */}
@@ -77,11 +75,11 @@ function App() {
           value={rating}
           onChange={(e) => setRating(parseInt(e.target.value, 10))}
         />
-        <Rating 
-          icon='star' 
-          maxRating={5} 
-          rating={rating} 
-          onRate={(e, { rating }) => setRating(rating)} 
+        <Rating
+          icon='star'
+          maxRating={5}
+          rating={rating}
+          onRate={(e, { rating }) => setRating(rating)}
         />
       </div>
 
@@ -112,18 +110,11 @@ function App() {
         />
       </Form.Group>
 
-      {/* Submit Rating Button */}
-      <Button 
-        content="Submit my Mood" 
-        primary 
-        onClick={handleSubmit} 
-      />
-
       {/* Fetch CSV Data Button */}
-      <Button 
-        content="Get my Playlist" 
-        color="teal" 
-        onClick={handleFetchCsvData} 
+      <Button
+        content="Get my Playlist"
+        color="teal"
+        onClick={handleGetPlaylist}
         style={{ marginTop: '20px' }}  // Add some margin at the top
       />
 
@@ -144,19 +135,19 @@ function App() {
         </div>
       )}
 
-        <List divided relaxed>
+      <List divided relaxed>
         {csvData.slice(0, textInput).map((row, index) => (  // Limit the displayed rows based on count
-            <List.Item key={index}>
+          <List.Item key={index}>
             <List.Content>
-                <List.Header>{`Song ${index + 1}`}</List.Header>
-                <List.Description>
+              <List.Header>{`Song ${index + 1}`}</List.Header>
+              <List.Description>
                 {row.join(', ')} {/* Join the row elements with a comma and space */}
-                </List.Description>
+              </List.Description>
             </List.Content>
-            </List.Item>
+          </List.Item>
         ))}
-        </List>
-    </div>
+      </List>
+    </div >
   );
 }
 
