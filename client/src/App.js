@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Rating } from 'semantic-ui-react';
+import { Button, Rating, Form, Radio } from 'semantic-ui-react';
 import './App.css';
 
 function App() {
   const [data, setData] = useState({});
   const [rating, setRating] = useState(0);
+  const [textInput, setTextInput] = useState('');
+  const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
 
   // Fetch initial data from Flask API
@@ -22,13 +24,17 @@ function App() {
 
   const handleSubmit = async () => {
     try {
-        const response = await fetch('/send_rating', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ rating: rating })
-        });
+      const response = await fetch('/send_rating', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          rating: rating,
+          textInput: textInput,
+          radioOption: radioOption
+        })
+      });
 
       const responseData = await response.json();
       setResponse(responseData.response);
@@ -57,6 +63,33 @@ function App() {
         />
       </div>
 
+      {/* Text Input */}
+      <Form.Input
+        label='Text Input'
+        placeholder='Enter text'
+        value={textInput}
+        onChange={(e) => setTextInput(e.target.value)}
+      />
+
+      {/* Radio Button Options */}
+      <Form.Group inline>
+        <label>Radio Options:</label>
+        <Form.Field
+          control={Radio}
+          label='Option 1'
+          value='option1'
+          checked={radioOption === 'option1'}
+          onChange={() => setRadioOption('option1')}
+        />
+        <Form.Field
+          control={Radio}
+          label='Option 2'
+          value='option2'
+          checked={radioOption === 'option2'}
+          onChange={() => setRadioOption('option2')}
+        />
+      </Form.Group>
+
       {/* Submit Rating Button */}
       <Button 
         content="Submit Rating" 
@@ -65,7 +98,7 @@ function App() {
       />
 
       {/* Display Response */}
-      {response && <p>Response from Flask: {response}</p>}
+      {response && <p>Playlist below!</p>}
 
       {/* Display Members */}
       {typeof data.members === 'undefined' ? (
