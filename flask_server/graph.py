@@ -49,7 +49,7 @@ class Graph:
         key = (node.track_id, node)
         if node.track_id not in self.adj_list:
             self.adj_list[key] = []
-        self.size += 1 #update the size of graph
+        self.size += 1 # update the size of graph
 
     # depth first traversal
     def dfs(self, start: Node, visited=None, out_file="dfs.csv"):
@@ -93,14 +93,3 @@ class Graph:
                 
                 for neighbor, _ in self.adj_list[(start.track_id, start)]:
                     queue.append(neighbor[1])
-         # prints out in bfs order            
-        for track_id in visited:
-                node = next((node for key, node in self.adj_list.keys() if key == track_id), None)
-                if node:
-                    bfs_vector.append(node)
-        return bfs_vector
-
-    def bfs_print(self, start_node: Node):
-        bfs_vector = self.bfs(start_node)
-        for song in bfs_vector:
-            print(f"{song.track_name} - {song.artists}")
