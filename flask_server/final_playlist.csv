@@ -1,46 +1,13 @@
 track_image_url,track_name,artists,track_genre,valence,tempo,energy,danceability
-https://i.scdn.co/image/ab67616d00001e029906e7ba8214cab60e84fba7,The Departure,Max Richter,ambient,0.0,0.0,0.0362,0.0
-https://i.scdn.co/image/ab67616d00001e02535a1ce73ef6eb9867ccfd1a,The End of Childhood (feat. Jack Liebeck),Dario Marianelli,ambient,0.0,0.0,0.0445,0.0
-https://i.scdn.co/image/ab67616d00001e029ea4df6ac465b387ff984e29,Ferme Les Yeux,Sylvain Chauveau,ambient,0.0,0.0,0.0323,0.0
-https://i.scdn.co/image/ab67616d00001e02b735006b6f9a882eb1b168ab,Campomoro,Little Symphony,guitar,0.0,0.0,0.00108,0.0
-https://i.scdn.co/image/ab67616d00001e02b735006b6f9a882eb1b168ab,Ritornello,Little Symphony,guitar,0.0,0.0,0.00129,0.0
-https://i.scdn.co/image/ab67616d00001e02b735006b6f9a882eb1b168ab,Amager,Little Symphony,guitar,0.0,0.0,0.004,0.0
-https://i.scdn.co/image/ab67616d00001e02b735006b6f9a882eb1b168ab,Ionian,Little Symphony,guitar,0.0,0.0,0.0268,0.0
-https://i.scdn.co/image/ab67616d00001e02cc0ca613e550789513e5f5e4,The Exorsism Begins...,Leila Bela,iranian,0.0,0.0,0.04,0.0
-https://i.scdn.co/image/ab67616d00001e02cc0ca613e550789513e5f5e4,Leaving Her Quantum Journey Behind...,Leila Bela,iranian,0.0,0.0,0.0314,0.0
-https://i.scdn.co/image/ab67616d00001e028e0fadf0ac422911ca4fbb15,"Le bourgeois gentilhomme: Chaconne des Scaramouches, Frivelins et Arlequins",Jean-Baptiste Lully,opera,0.0,0.0,0.0192,0.0
-https://i.scdn.co/image/ab67616d00001e02a0cddf459ff24a2bc129603d,"Bizet: Carmen, Act 1: ""Quels regardes! Quelle effronterie!"" (Carmen, José)",Georges Bizet,opera,0.0,0.0,0.172,0.0
-https://i.scdn.co/image/ab67616d00001e0279797e3e9fe878b5b6061f1e,Три товарища - Remastered,Maya Kristalinskaya,romance,0.0,0.0,0.122,0.0
-https://i.scdn.co/image/ab67616d00001e028e0d25874dada1f6bc30232e,Box Fan Long Loop For Sleep,Fan Sounds,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02cca46440e027e1dfe1d0c9b6,Weißes Rauschen: Tiefschlaf,Weißes Rauschen HD,sleep,0.0,0.0,0.00601,0.0
-https://i.scdn.co/image/ab67616d00001e02822bc4914f2e723f8e5849c3,Soothing Brown Noise Waves,Sleep Baby Sleep,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e026a1a233948dc861b351881b1,Noise for Restless Kids,Water Sound Natural White Noise,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02c9167ec91f693ede2aaf88ca,Pouring Rain - Loopable with No Fade,Sleep Baby Sleep,sleep,0.0,0.0,6.19e-05,0.0
-https://i.scdn.co/image/ab67616d00001e026a1a233948dc861b351881b1,Deep Sleep Recovery Noise,Water Sound Natural White Noise,sleep,0.0,0.0,0.032,0.0
-https://i.scdn.co/image/ab67616d00001e025f5ae630a16b0bbfbd52d467,Sleep Rain,Rain Sounds,sleep,0.0,0.0,0.0146,0.0
-https://i.scdn.co/image/ab67616d00001e02449522fc7b8cc8fe9a1846f4,Pure Brown Noise,Spa,sleep,0.0,0.0,2.01e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02d0f4b01dfdfdd276e8b058f7,White Noise - Loopable With No Fade,White Noise Sleep Sounds,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02aba23dfb942010eebd78827f,Pure Brown Noise - Loopable with No Fade,Deep Sleep,sleep,0.0,0.0,2.01e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02b7eb858e8715db6b67c83c5e,Pure Brown Noise - Loopable with no fade,Deep Sleep,sleep,0.0,0.0,2.01e-05,0.0
-https://i.scdn.co/image/ab67616d00001e020f45581f1a1f35a4e7e9349d,Baby White Noise Series - Pure White Noise,Baby Sweet Dream,sleep,0.0,0.0,2.01e-05,0.0
-https://i.scdn.co/image/ab67616d00001e027cd9301c14f2342494373454,Fan - Loopable with No Fade,White Noise Meditation,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e026f1b5c55e5e0e89c685e9907,Relaxing Rain,Rain Sounds,sleep,0.0,0.0,0.000574,0.0
-https://i.scdn.co/image/ab67616d00001e02cca46440e027e1dfe1d0c9b6,Weißes Rauschen: Schlafmittel,Weißes Rauschen HD,sleep,0.0,0.0,0.0011,0.0
-https://i.scdn.co/image/ab67616d00001e0246bc3522017c3fab765e9069,Brown Noise Waves and the Pouring Rain,Loopable,sleep,0.0,0.0,4.28e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02a6fe77e3c7daabe895339674,Pouring Rain - Loopable with no fade,Meditation Spa,sleep,0.0,0.0,6.19e-05,0.0
-https://i.scdn.co/image/ab67616d00001e028513384daec8f24f24281330,Pure White Noise,Baby Sweet Dream,sleep,0.0,0.0,2.01e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02f12f883c11528aa6429317c7,Pink Noise For Sleep 14,Granular,sleep,0.0,0.0,0.11,0.0
-https://i.scdn.co/image/ab67616d00001e02611ef9f840e4707630691c84,Brown Noise For Sleep 2,Granular,sleep,0.0,0.0,0.00188,0.0
-https://i.scdn.co/image/ab67616d00001e027c9d031cbe91c61b893aadf5,Sleeping Hoover,Silent Knights,sleep,0.0,0.0,0.000734,0.0
-https://i.scdn.co/image/ab67616d00001e02aba23dfb942010eebd78827f,Clean White Noise,Spa,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e026a1a233948dc861b351881b1,Fine Noise for Children,Water Sound Natural White Noise,sleep,0.0,0.0,0.032,0.0
-https://i.scdn.co/image/e24eda2174a3bcc6b3bdda2504222719aa36e43f,Paradise Rain,Sound Sleeping,sleep,0.0,0.0,0.0474,0.0
-https://i.scdn.co/image/ab67616d00001e02192e900f24e5992e431f4034,Clean White Noise - Loopable with no fade,White Noise Baby Sleep,sleep,0.0,0.0,0.00342,0.0
-https://i.scdn.co/image/ab67616d00001e02c4eb604686b00fac703cab94,Beach Waves and Soothing Brown Noise,Sleep Baby Sleep,sleep,0.0,0.0,0.000252,0.0
-https://i.scdn.co/image/ab67616d00001e023057331c6637b8bd9b2e5231,Deeper Sounding Vacuum Cleaner 2 - Stationary,Vacuum Cleaner White Noise,sleep,0.0,0.0,5.9e-05,0.0
-https://i.scdn.co/image/ab67616d00001e024eeef231d76582aa3855706d,White Noise - BP 1257 hz,Granular,sleep,0.0,0.0,2.02e-05,0.0
-https://i.scdn.co/image/ab67616d00001e02f12f883c11528aa6429317c7,Pink Noise For Sleep 6,Granular,sleep,0.0,0.0,0.000553,0.0
-https://i.scdn.co/image/ab67616d00001e020d09e49ab8a4f7745f39c13a,Clean White Noise - Loopable With No Fade - White Noise For Baby Sleep Remix,White Noise Babies,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e025f5ae630a16b0bbfbd52d467,Spa Rain,Rain Sounds,sleep,0.0,0.0,0.00743,0.0
-https://i.scdn.co/image/ab67616d00001e027dcf723a0b9dac2e09799ba9,Smooth Sailing,White Noise Therapy,sleep,0.0,0.0,2.03e-05,0.0
-https://i.scdn.co/image/ab67616d00001e0208bb76085e21266d021ea33e,Rain Sleep: Deep Forest Rain,Rain for Deep Sleep,sleep,0.0,0.0,0.148,0.0
+https://i.scdn.co/image/ab67616d00001e02d42b80c9b6fa4cdf784ac8a5,ily (i love you baby),Andrew Foy,acoustic,0.414,110.154,0.112,0.706
+https://i.scdn.co/image/ab67616d00001e02e8905408dcd8913f35f2c32f,C'est si bon,Aoi Teshima,acoustic,0.479,113.913,0.203,0.735
+https://i.scdn.co/image/ab67616d00001e022ae5d91095669b5012d14965,God Only Knows,Kina Grannis,acoustic,0.507,106.686,0.125,0.658
+https://i.scdn.co/image/ab67616d00001e02153c128f1bfde8c6b55b338a,Build Me Up Buttercup,Kina Grannis,acoustic,0.576,124.868,0.0963,0.721
+https://i.scdn.co/image/ab67616d00001e0282a4060dcd08ec95f9ca752b,As It Was - Acoustic,Amber Leigh Irish,acoustic,0.513,118.162,0.0477,0.595
+https://i.scdn.co/image/ab67616d00001e0254ae76f4a06d7d431012cdd6,Beyond The Sea,Kina Grannis,acoustic,0.517,103.948,0.118,0.676
+https://i.scdn.co/image/ab67616d00001e02e02585fc748140202a64660a,Seven Nation Army - Acoustic Covers Versions of Popular Songs,Vendredi,acoustic,0.538,109.822,0.208,0.773
+https://i.scdn.co/image/ab67616d00001e02b86cd62c701fedec3f15f97c,Mujer con Abanico,Agustín Amigó,acoustic,0.471,103.939,0.135,0.769
+https://i.scdn.co/image/ab67616d00001e02ca91cf5c5300ebfd14fbe9f5,Better Together,Us The Duo,acoustic,0.553,109.891,0.311,0.761
+https://i.scdn.co/image/ab67616d00001e02b060025ed0a740a1e92696a2,There She Goes,Clementine Duo,acoustic,0.527,106.966,0.28,0.724
+https://i.scdn.co/image/ab67616d00001e0223964d6ff0be2f6ebd7aa6ae,Something Stupid,Bailey Pelkman,acoustic,0.491,117.961,0.261,0.789
+https://i.scdn.co/image/ab67616d00001e02cff531786485fee6fa0a517d,Isn't She Lovely - Acoustic,Callum J Wright,acoustic,0.424,115.671,0.306,0.69
