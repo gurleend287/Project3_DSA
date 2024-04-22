@@ -132,7 +132,7 @@ function App() {
 
       {/* Display Members */}
       {typeof data.members === 'undefined' ? (
-        <p>Loading...</p>
+        <p></p>
       ) : (
         <div>
           <h3>Members:</h3>
