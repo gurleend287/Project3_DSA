@@ -51,6 +51,9 @@ relevant_cols = [
 ]
 df2 = df[relevant_cols].copy()
 
+# remove duplicate songs (by name and not id because some repeated songs remained afted id filteration)
+df2 = df2.drop_duplicates(subset=['track_name'])
+
 # mood ranges for valence, energy, and dancabiliity
 # may need to broaden ranges/overlap if not enough songs meet criteria
 criteria = ['danceability', 'energy', 'valence', 'tempo']
@@ -77,28 +80,9 @@ mood_input = input("Rate your mood (1-5): ")
 threshold_map = {}
 for key, ranges in ranges_map.items():
     threshold_map[key] = ranges.get(int(mood_input))
-    
-# # test node class
-# first = df2.iloc[67750].to_dict()
-# node1 = Node(**first)
-# second = df2.iloc[2].to_dict()
-# node2 = Node(**second)
-
-# print(node1.__repr__())
-# print(node2.__repr__())
-
-# # test graph class
-# temp = 'valence'
-# print(threshold_map['valence'])
-# print(getattr(node1, 'valence'))
-# print(getattr(node1, temp) < threshold_map[temp][0] or getattr(node1, temp) > threshold_map[temp][1])
 
 graph = Graph(threshold_map)
 
-
-# print(adj_list.find_similarity(node1, node2))
-# adj_list.add_node(node1, cols)
-# print(adj_list)
 num1 = 0
 
 #keep track of the first node that gets added 
@@ -112,7 +96,7 @@ for i, row in df2.iloc[:len(df2)//2].iterrows():
     curr_node = Node(**row.to_dict())
     if (graph.size== 0):
         first_node= curr_node
-    if(graph.size < 250):
+    if(graph.size < 30):
         graph.add_node(curr_node, cols1)
 
 # parse through second half of dataset
@@ -120,7 +104,7 @@ for i, row in df2.iloc[:len(df2)//2].iterrows():
 for i, row in df2.iloc[len(df2)//2:].iterrows():
     num1 = num1 + 1
     curr_node = Node(**row.to_dict())
-    if(graph.size < 250): #ensure graph does not exceed size of max playlist
+    if(graph.size < 30): #ensure graph does not exceed size of max playlist
         graph.add_node(curr_node, criteria)
     
 # add edges between nodes
@@ -130,40 +114,67 @@ for i in range(len(keys)):
         graph.add_edge(keys[i][1], keys[j][1])
 
 
-num = 0
-for key, neighbors in graph.adj_list.items():
-    num = num + 1
-    num_neighbors = len(neighbors)
-    print(f"Node {key[0]} has {num_neighbors} neighbors.")
-    
-    if num > 30:
-        break
-    # print(neighbors[5])
-    
-max_sim = graph.adj_list[keys[0]][0][1]
-min_sim = graph.adj_list[keys[0]][0][1]
+# # get user input for search algo
+# search_input = input("Select a search algorithm (1-BFS or 2-DFS): ")
 
-for key, neighbors in graph.adj_list.items():
-    for item in neighbors:
-        if item[1] > max_sim:
-            max_sim = item[1]
-        elif item[1] < min_sim:
-            min_sim = item[1]
+# if (search_input == 1):
     
-print(min_sim)
-print(max_sim)
+
+
+# # testing neighbors
+# num = 0
+# for key, neighbors in graph.adj_list.items():
+#     num = num + 1
+#     num_neighbors = len(neighbors)
+#     print(f"Node {key[0]} has {num_neighbors} neighbors.")
     
-print(num1)
-print(len(graph.adj_list))
+#     if num > 30:
+#         break
+    
+# max_sim = graph.adj_list[keys[0]][0][1]
+# min_sim = graph.adj_list[keys[0]][0][1]
 
-print("------------------------------------------")
-print(first_node.track_name)
-graph.dfs_print(first_node)
+# for key, neighbors in graph.adj_list.items():
+#     for item in neighbors:
+#         if item[1] > max_sim:
+#             max_sim = item[1]
+#         elif item[1] < min_sim:
+#             min_sim = item[1]
+    
+# print(min_sim)
+# print(max_sim)
+    
+# print(num1)
+# print(len(graph.adj_list))
 
-# testing bfs 
+# print("------------------------------------------")
+# print(first_node.track_name)
+# graph.dfs_print(first_node)
+
+# # testing bfs 
+# start_node = next(iter(graph.adj_list.keys()))[1]
+
+
+# graph.dfs(start_node)
+# print("\n\n")
+# graph.dfs_print(start_node)
+
+
+
 start_node = next(iter(graph.adj_list.keys()))[1]
+# graph.dfs_print(start_node)
+# print("\n\n")
 
-print("BFS Traversal:")
+# remove existing file
+if os.path.exists("dfs.csv"):
+    os.remove("dfs.csv")
+
 graph.bfs(start_node)
 
-("----7777777777--------------------------------------")
+# # print node and neighbors with weights
+# for pair, neighbors in graph.adj_list.items():
+#     print(pair[1].track_name)
+#     for neighbor, weight in neighbors:
+#         print(f"    -> {neighbor[1].track_name} (weight: {weight})")
+
+# print(graph.size)
