@@ -147,6 +147,14 @@ def create_graph(mood_input):
                 max_sim = item[1]
             elif item[1] < min_sim:
                 min_sim = item[1]
+# remove duplicate songs (by name and not id because some repeated songs remained afted id filteration)
+df2 = df2.drop_duplicates(subset=['track_name'])
+
+# mood ranges for valence, energy, and dancabiliity
+# may need to broaden ranges/overlap if not enough songs meet criteria
+criteria = ['danceability', 'energy', 'valence', 'tempo']
+ranges_map = {}
+num_ranges = 5
 
     return graph
         
@@ -166,5 +174,105 @@ def test_traversal(graph):
     print("DFS Traversal:")
     graph.dfs_print(start_node)
 
+# set thresholds based on chosen mood
+threshold_map = {}
+for key, ranges in ranges_map.items():
+    threshold_map[key] = ranges.get(int(mood_input))
+
+graph = Graph(threshold_map)
+
+num1 = 0
+
+#keep track of the first node that gets added 
+first_node = None
+
+# parse through first half of dataset
+# add nodes based on tempo and valence only
+cols1 = ['valence', 'tempo']
+for i, row in df2.iloc[:len(df2)//2].iterrows():
+    num1 = num1 + 1
+    curr_node = Node(**row.to_dict())
+    if (graph.size== 0):
+        first_node= curr_node
+    if(graph.size < 30):
+        graph.add_node(curr_node, cols1)
+
+# parse through second half of dataset
+# add nodes based on all 4 criteria
+for i, row in df2.iloc[len(df2)//2:].iterrows():
+    num1 = num1 + 1
+    curr_node = Node(**row.to_dict())
+    if(graph.size < 30): #ensure graph does not exceed size of max playlist
+        graph.add_node(curr_node, criteria)
+    
+# add edges between nodes
+keys = list(graph.adj_list.keys())
+for i in range(len(keys)):
+    for j in range(i+1, len(keys)):
+        graph.add_edge(keys[i][1], keys[j][1])
 
 
+# # get user input for search algo
+# search_input = input("Select a search algorithm (1-BFS or 2-DFS): ")
+
+# if (search_input == 1):
+    
+
+
+# # testing neighbors
+# num = 0
+# for key, neighbors in graph.adj_list.items():
+#     num = num + 1
+#     num_neighbors = len(neighbors)
+#     print(f"Node {key[0]} has {num_neighbors} neighbors.")
+    
+#     if num > 30:
+#         break
+    
+# max_sim = graph.adj_list[keys[0]][0][1]
+# min_sim = graph.adj_list[keys[0]][0][1]
+
+# for key, neighbors in graph.adj_list.items():
+#     for item in neighbors:
+#         if item[1] > max_sim:
+#             max_sim = item[1]
+#         elif item[1] < min_sim:
+#             min_sim = item[1]
+    
+# print(min_sim)
+# print(max_sim)
+    
+# print(num1)
+# print(len(graph.adj_list))
+
+# print("------------------------------------------")
+# print(first_node.track_name)
+# graph.dfs_print(first_node)
+
+# # testing bfs 
+# start_node = next(iter(graph.adj_list.keys()))[1]
+
+
+# graph.dfs(start_node)
+# print("\n\n")
+# graph.dfs_print(start_node)
+
+
+
+start_node = next(iter(graph.adj_list.keys()))[1]
+# graph.dfs_print(start_node)
+# print("\n\n")
+
+# remove existing file
+if os.path.exists("dfs.csv"):
+    os.remove("dfs.csv")
+
+graph.bfs(start_node)
+
+# # print node and neighbors with weights
+# for pair, neighbors in graph.adj_list.items():
+#     print(pair[1].track_name)
+#     for neighbor, weight in neighbors:
+#         print(f"    -> {neighbor[1].track_name} (weight: {weight})")
+
+# print(graph.size)
