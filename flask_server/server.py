@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-from main import create_graph, test_traversal
 import playlist
 
 app = Flask(__name__)
@@ -13,15 +12,27 @@ def members():
 def receive_rating():
     data = request.get_json()
     rating = data.get('rating')
+    textInput = data.get('textInput')
+    radioOption = data.get('radioOption')
     
     # Store the rating in a variable
     # app.rating = rating
 
-    rating_num= int(rating)
-    print("______")
-    print(rating_num)
-    print("______")
+    mood_input= int(rating)
+    playlist_size=int(textInput)
+    search_input_str= str(radioOption)
+    search_input = None
 
+    if (search_input_str == "option1"):
+        search_input=1
+    if (search_input_str == "option2"):
+        search_input=2
+
+    print("______") 
+    print(mood_input)
+    print(playlist_size)
+    print(search_input)
+    print("______") 
 
     df = playlist.process_data()
     criteria = ['danceability', 'energy', 'valence', 'tempo']
@@ -31,7 +42,7 @@ def receive_rating():
     ranges_map = playlist.criteria_ranges(df, criteria, num_ranges=5)
     
     # user input
-    mood_input, playlist_size, search_input = playlist.get_user_input()
+    # mood_input, playlist_size, search_input = playlist.get_user_input()
 
     # thesholds based on mood input
     threshold_map = playlist.define_thesholds(ranges_map, mood_input)
@@ -41,11 +52,19 @@ def receive_rating():
     # creates csv files based on search algo chosen
     playlist.perform_search(graph, search_input)
 
-
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
 
     return jsonify({'response': response})
+
+@app.route('/get_csv_data')
+def get_csv_data():
+    # Read the CSV file here
+    filename = request.args.get('file_name')
+    # For this example, I'm assuming dfs.csv and bfs.csv are in the same directory
+    with open(filename, 'r') as file:
+        data = [line.strip().split(',') for line in file.readlines()]
+    return jsonify(data)
 
 
 if __name__ == "__main__":
