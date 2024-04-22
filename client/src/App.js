@@ -144,20 +144,19 @@ function App() {
         </div>
       )}
 
-      <List divided relaxed>
-        {csvData.slice(1, textInput + 1).map((row, index) => (
-          <List.Item key={index}>
-            <List.Content>
-              <div className="card">
-                <img src={row[0]} alt="Track cover" className="image" />
-                <Card.Description className="card-description">
-                  {row.slice(1).join(', ')}
-                </Card.Description>
-              </div>
-            </List.Content>
-          </List.Item>
-        ))}
-      </List>
+
+
+    <div className="card-container">
+    {csvData.slice(1, textInput + 1).map((row, index) => (
+        <div className="card" key={index}>
+        <img src={row[0]} alt="Track cover" className="image" />
+        <Card.Description className="card-description">
+            {row.slice(1).join(', ')}
+        </Card.Description>
+        </div>
+    ))}
+    </div>
+
     </div >
   );
 }
