@@ -1,6 +1,6 @@
 import base64
 import json
-from requests import post
+from requests import post, get
 
 # obtain access token
 def get_token(client_id, client_secret):
@@ -24,3 +24,21 @@ def get_token(client_id, client_secret):
 # create header using access token for requests
 def get_auth_header(token):
      return {"Authorization": "Bearer " + token}
+
+# some track_names not given in viable format
+# get track_details
+def get_track_details(token, track_id: str):
+    url = "https://api.spotify.com/v1/tracks/"
+    headers = get_auth_header(token)
+    query_url = url + track_id
+    result = get(query_url, headers=headers)
+    json_result = json.loads(result.content)
+
+    # get details: image url, track name, track url
+    image_url = json_result['album']['images'][1]['url']
+    track_name = json_result['name']
+    track_url = json_result['external_urls']['spotify']
+    artist = json_result['artists'][0]['name']
+    
+    return image_url, track_name, track_url, artist
+

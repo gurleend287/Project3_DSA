@@ -2,11 +2,13 @@ import os
 import pandas as pd
 from graph import Graph
 from node import Node
+import csv
+import api
 
 # read and process csv file into df
 def process_data():
     # read csv file
-    df = pd.read_csv('../train.csv')
+    df = pd.read_csv('train.csv')
 
     # only use relavent cols
     relevant_cols = [
@@ -78,6 +80,8 @@ def build_graph(df, playlist_size: int, criteria: list[str], threshold_map: dict
 
     return graph
 
+
+# perform picked search algorithm
 def perform_search(graph: Graph, search_input: int):
     start_node = next(iter(graph.adj_list.keys()))[1]
 
@@ -90,4 +94,48 @@ def perform_search(graph: Graph, search_input: int):
         # remove existing file
         if os.path.exists("dfs.csv"):
             os.remove("dfs.csv")
+        # write header to new csv file
+        with open('dfs.csv', mode='a', newline='') as file:
+            writer = csv.writer(file)
+            writer.writerow(['track_id', 'popularity', 'duration_ms', 'danceability',
+                             'energy', 'loudness', 'instrumentalness', 'valence', 'tempo', 'track_genre'])
         graph.dfs(start_node)
+
+# find average of given characters
+def average_val(file_name, characteristics: list[str], playlist_size: int):
+    try:
+        # read csv and cut off at playlist_size
+        df = pd.read_csv(file_name)
+        df = df[characteristics]
+        df = df.head(playlist_size)
+        # create dict of averages (keys are col names)
+        averages = df.mean().to_dict()
+        return averages
+    except FileNotFoundError:
+        print(f"File '{file_name}' not found")
+        return None
+
+# modify playlist df to include track_name, track_image_url, and track_url
+def add_track_details(df, playlist_size: int, token):
+    image_urls = []
+    track_names = []
+    track_urls = []
+    artists = []
+
+    for track_id in df['track_id'].head(playlist_size):
+        # get track details using api
+        image_url, track_name, track_url, artist = api.get_track_details(token, track_id)
+        
+        image_urls.append(image_url)
+        track_names.append(track_name)
+        track_urls.append(track_url)
+        artists.append(artist)
+
+    # add to df
+    df['track_image_url'] = image_urls
+    df['track_name'] = track_names
+    df['track_url'] = track_urls
+    df['artists'] = artists
+
+    return df
+        
