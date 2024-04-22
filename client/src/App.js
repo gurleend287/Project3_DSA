@@ -84,7 +84,7 @@ function App() {
     <div className="App">
       {/* Website Header */}
       <header className="App-header">
-        <h1> Playlist Creator </h1>
+        <h1> 😭 Mood to Music 😁  </h1>
       </header>
 
       {/* Rating Component */}
