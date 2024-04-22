@@ -35,16 +35,7 @@ function App() {
 
   const handleFetchCsvData = async () => {
     try {
-      let filename;
-      if (radioOption === "option2") {
-        filename = "dfs.csv";
-      }
-
-      if (radioOption === "option1") {
-        filename = "bfs.csv";
-      }
-
-      const csvResponse = await fetch(`/get_csv_data?file_name=${filename}`);
+      const csvResponse = await fetch(`/get_csv_data`);
       const csvData = await csvResponse.json();
       setCsvData(csvData);
 
