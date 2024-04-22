@@ -66,6 +66,24 @@ def get_csv_data():
         data = [line.strip().split(',') for line in file.readlines()]
     return jsonify(data)
 
+def get_graph_data():
+    # Generate and return graph data (nodes and links) here
+    # For example:
+    graph_data = {
+        "nodes": [
+            {"id": "node1"},
+            {"id": "node2"},
+            # Add more nodes as needed
+        ],
+        "links": [
+            {"source": "node1", "target": "node2"},
+            # Add more links as needed
+        ]
+    }
+    
+    return jsonify(graph_data)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

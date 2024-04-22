@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Rating, Form, Radio, List } from 'semantic-ui-react';
 import './App.css';
+import GraphVisualization from './GraphVisualization';
 
 function App() {
   const [data, setData] = useState({});
@@ -9,6 +10,21 @@ function App() {
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
+  const [graphData, setGraphData] = useState(null);
+
+  useEffect(() => {
+    const fetchGraphData = async () => {
+      try {
+        const response = await fetch('/get_graph_data'); // Update the endpoint as per your backend
+        const data = await response.json();
+        setGraphData(data);
+      } catch (error) {
+        console.error('Error fetching graph data:', error);
+      }
+    };
+
+    fetchGraphData();
+  }, []);
 
   useEffect(() => {
     fetch("/members")
@@ -175,6 +191,7 @@ function App() {
           </List.Item>
         ))}
       </List>
+      {graphData && <GraphVisualization graphData={graphData} />} {/* Render GraphVisualization component */}
     </div>
   );
 }
