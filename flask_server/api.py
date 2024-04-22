@@ -26,7 +26,7 @@ def get_auth_header(token):
      return {"Authorization": "Bearer " + token}
 
 # some track_names not given in viable format
-# get track_names based on track_ids
+# get track_details
 def get_track_details(token, track_id: str):
     url = "https://api.spotify.com/v1/tracks/"
     headers = get_auth_header(token)
@@ -38,6 +38,7 @@ def get_track_details(token, track_id: str):
     image_url = json_result['album']['images'][1]['url']
     track_name = json_result['name']
     track_url = json_result['external_urls']['spotify']
+    artist = json_result['artists'][0]['name']
     
-    return image_url, track_name, track_url
+    return image_url, track_name, track_url, artist
 

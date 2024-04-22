@@ -3,6 +3,7 @@ import pandas as pd
 from graph import Graph
 from node import Node
 import csv
+import api
 
 # read and process csv file into df
 def process_data():
@@ -113,3 +114,28 @@ def average_val(file_name, characteristics: list[str], playlist_size: int):
     except FileNotFoundError:
         print(f"File '{file_name}' not found")
         return None
+
+# modify playlist df to include track_name, track_image_url, and track_url
+def add_track_details(df, playlist_size: int, token):
+    image_urls = []
+    track_names = []
+    track_urls = []
+    artists = []
+
+    for track_id in df['track_id'].head(playlist_size):
+        # get track details using api
+        image_url, track_name, track_url, artist = api.get_track_details(token, track_id)
+        
+        image_urls.append(image_url)
+        track_names.append(track_name)
+        track_urls.append(track_url)
+        artists.append(artist)
+
+    # add to df
+    df['track_image_url'] = image_urls
+    df['track_name'] = track_names
+    df['track_url'] = track_urls
+    df['artists'] = artists
+
+    return df
+        
