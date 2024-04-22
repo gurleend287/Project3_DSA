@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Rating, Form, Radio, List } from 'semantic-ui-react';
 import './App.css';
+import GraphVisualization from './GraphVisualization';
 
 function App() {
   const [data, setData] = useState({});
   const [rating, setRating] = useState(0);
-  const [textInput, setTextInput] = useState('');
+  const [textInput, setTextInput] = useState(''); 
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
@@ -65,12 +66,28 @@ function App() {
 
   return (
     <div className="App">
+      {/* Website Header */}
+      <header className="App-header">
+        <h1> 😭 Mood to Music 😁  </h1>
+      </header>
+
       {/* Rating Component */}
       <div>
-        <label>Rating: {rating}</label>
+        {/* Rating Descriptions */}
+        <div className="rating-descriptions">
+        <p>
+          Moods: <br />
+          1 - Super Sad<br />
+          2 - Sad<br />
+          3 - Neutral<br />
+          4 - Happy<br />
+          5 - Super Happy
+        </p>
+        </div>
+        <label>Rate your mood: {rating}</label>
         <input
           type='range'
-          min={0}
+          min={1}
           max={5}
           value={rating}
           onChange={(e) => setRating(parseInt(e.target.value, 10))}
@@ -93,7 +110,7 @@ function App() {
 
       {/* Radio Button Options */}
       <Form.Group inline>
-        <label>Select a search algorithm:</label>
+        <label>Select a search algorithm (Breath-First Search or Depth-First Search):</label>
         <Form.Field
           control={Radio}
           label='BFS'
@@ -136,12 +153,12 @@ function App() {
       )}
 
       <List divided relaxed>
-        {csvData.slice(0, textInput).map((row, index) => (  // Limit the displayed rows based on count
+        {csvData.slice(0, textInput).map((row, index) => (
           <List.Item key={index}>
             <List.Content>
               <List.Header>{`Song ${index + 1}`}</List.Header>
               <List.Description>
-                {row.join(', ')} {/* Join the row elements with a comma and space */}
+                {row.join(', ')}
               </List.Description>
             </List.Content>
           </List.Item>

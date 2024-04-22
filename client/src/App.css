@@ -16,7 +16,7 @@
 
 .App-header {
   background-color: white;
-  min-height: 100vh;
+  min-height: 10vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,4 +36,28 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+
+.App-header {
+  color: rgb(0, 0, 0);
+  padding: 20px; 
+  font-size: 24px; 
+}
+
+.button-container {
+  margin-top: 20px; 
+  display: flex;
+  justify-content: center; 
+  gap: 10px; 
+}
+
+.button {
+  margin: 5 5px; 
+}
+
+.rating-descriptions {
+  border: 2px solid #007bff; 
+  padding: 0px; 
+  margin-bottom: 20px; 
 }
