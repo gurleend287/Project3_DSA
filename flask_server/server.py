@@ -53,6 +53,16 @@ def receive_rating():
 
     # thesholds based on mood input
     threshold_map = playlist.define_thesholds(ranges_map, mood_input)
+    print(threshold_map)
+
+    combined_metric = {}
+
+    for metric, bounds in threshold_map.items():
+        lower_bound, upper_bound = bounds
+        avg_metric = (lower_bound + upper_bound) / 2
+        combined_metric[metric] = avg_metric
+
+    print(combined_metric)
 
     graph = playlist.build_graph(df, playlist_size, criteria, threshold_map)
 
@@ -64,15 +74,44 @@ def receive_rating():
         file_name = 'bfs.csv'
     elif (search_input == 2):
         file_name = 'dfs.csv'
-    average_cols = ['danceability', 'energy', 'valence', 'tempo', 'loudness', 'instrumentalness']
+    average_cols = ['danceability', 'energy', 'valence', 'tempo']
+
     # returns dict of averages
     average_dict = playlist.average_val(file_name, average_cols, playlist_size)
+    print(average_dict)
+
+    common_keys = set(average_dict.keys()) & set(combined_metric.keys())
+
+    # Calculate the absolute difference for each common key
+    difference = {}
+    for key in common_keys:
+        diff = abs(average_dict[key] - combined_metric[key])
+        difference[key] = diff
+
+    print(difference)
+
+    # Sum up all the absolute differences
+    total_difference = sum(difference.values())
+
+# Find the number of differences
+    num_differences = len(difference)
+
+# Calculate the average difference
+    average_difference = total_difference / num_differences
+
+    print("Average difference:", average_difference)
 
     # build playlist df based on input
     playlist_df = pd.read_csv(file_name)
 
     # add track details
     playlist_df = playlist.add_track_details(playlist_df, playlist_size, token)
+
+    # remove irrelavent cols and rearrange
+    cols_to_drop = ['track_id', 'popularity', 'duration_ms', 'instrumentalness', 'loudness']
+    playlist_df.drop(columns=cols_to_drop, inplace=True)
+    cols_order = ['track_name', 'artists', 'track_genre', 'valence', 'tempo', 'energy', 'danceability']
+    playlist_df = playlist_df[cols_order]
 
     # remove existing file
     if os.path.exists("final_playlist.csv"):
