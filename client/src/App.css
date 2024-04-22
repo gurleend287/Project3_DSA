@@ -1,4 +1,5 @@
 .App {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   text-align: center;
   background-color: white;
 }
@@ -15,6 +16,7 @@
 }
 
 .App-header {
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   background-color: white;
   min-height: 10vh;
   display: flex;
@@ -60,4 +62,84 @@
   border: 2px solid #007bff; 
   padding: 0px; 
   margin-bottom: 20px; 
+}
+
+/* .card-container {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.card-content {
+  padding: 20px;
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.card-name {
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.card-description {
+  font-size: 16px;
+  color: #fff;
+} */
+
+/* .card-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+}
+
+.card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.card-details {
+  text-align: center;
+}
+
+.card-details p {
+  margin: 5px 0;
+} */
+
+/* New styles for images */
+/* .image {
+  width: 100px; /* Adjust width as needed, possibly to a fixed px value for more control */
+  /* height: auto; /* Keeps aspect ratio intact */
+  /* border-radius: 10px; /* Gives a rounded appearance to the image */
+/* } */
+
+.card {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  background-color: #333; /* Dark background for the card */
+  border-radius: 10px; /* Rounded corners for the card */
+  margin-bottom: 20px; /* Space between cards if stacked vertically */
+  padding: 20px; /* Padding inside the card */
+  width: 250px; /* Fixed width for consistency */
+  color: #fff; /* White text color */
+}
+
+.image {
+  width: 100%; /* Adjust this to control the size of the image within the card */
+  border-radius: 8px; /* Rounded corners for the image */
+  margin-bottom: 10px; /* Space between the image and the text */
+}
+
+.card-description {
+  font-size: 16px;
+  text-align: center; /* Center the text */
+}
+
+.List {
+  display: flex;
+  flex-wrap: wrap; /* Allows wrapping to the next line */
+  gap: 20px; /* Space between cards */
+  justify-content: center; /* Center cards horizontally if they don't fill all space */
 }

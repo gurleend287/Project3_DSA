@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Rating, Form, Radio, List } from 'semantic-ui-react';
 import './App.css';
-import GraphVisualization from './GraphVisualization';
+import { Card } from 'semantic-ui-react';
+import { Image } from 'semantic-ui-react';
 
 function App() {
   const [data, setData] = useState({});
   const [rating, setRating] = useState(0);
-  const [textInput, setTextInput] = useState(''); 
+  const [textInput, setTextInput] = useState('');
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
@@ -66,14 +67,14 @@ function App() {
       <div>
         {/* Rating Descriptions */}
         <div className="rating-descriptions">
-        <p>
-          Moods: <br />
-          1 - Super Sad<br />
-          2 - Sad<br />
-          3 - Neutral<br />
-          4 - Happy<br />
-          5 - Super Happy
-        </p>
+          <p>
+            Moods: <br />
+            1 - Super Sad<br />
+            2 - Sad<br />
+            3 - Neutral<br />
+            4 - Happy<br />
+            5 - Super Happy
+          </p>
         </div>
         <label>Rate your mood: {rating}</label>
         <input
@@ -90,7 +91,7 @@ function App() {
           onRate={(e, { rating }) => setRating(rating)}
         />
       </div>
-
+      <p> </p>
       {/* Text Input */}
       <Form.Input
         label='Enter Playlist Size (1-100)'
@@ -98,7 +99,7 @@ function App() {
         value={textInput}
         onChange={(e) => setTextInput(e.target.value)}
       />
-
+      <p> </p>
       {/* Radio Button Options */}
       <Form.Group inline>
         <label>Select a search algorithm (Breath-First Search or Depth-First Search):</label>
@@ -144,13 +145,15 @@ function App() {
       )}
 
       <List divided relaxed>
-        {csvData.slice(0, textInput).map((row, index) => (
+        {csvData.slice(1, textInput + 1).map((row, index) => (
           <List.Item key={index}>
             <List.Content>
-              <List.Header>{`Song ${index + 1}`}</List.Header>
-              <List.Description>
-                {row.join(', ')}
-              </List.Description>
+              <div className="card">
+                <img src={row[0]} alt="Track cover" className="image" />
+                <Card.Description className="card-description">
+                  {row.slice(1).join(', ')}
+                </Card.Description>
+              </div>
             </List.Content>
           </List.Item>
         ))}
