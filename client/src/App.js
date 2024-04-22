@@ -148,19 +148,11 @@ function App() {
         {csvData.slice(1, textInput + 1).map((row, index) => (
           <List.Item key={index}>
             <List.Content>
-              <div className="card-container">
-                <Card>
-                  <Card.Content>
-                    <Image src={row[0]} wrapped ui={false} />
-                    <Card.Description>
-                      <div className="card-details">
-                        {row.slice(1).map((item, i) => (
-                          <p key={i}>{item}</p>
-                        ))}
-                      </div>
-                    </Card.Description>
-                  </Card.Content>
-                </Card>
+              <div className="card">
+                <img src={row[0]} alt="Track cover" className="image" />
+                <Card.Description className="card-description">
+                  {row.slice(1).join(', ')}
+                </Card.Description>
               </div>
             </List.Content>
           </List.Item>
