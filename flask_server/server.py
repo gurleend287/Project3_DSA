@@ -110,7 +110,7 @@ def receive_rating():
     # remove irrelavent cols and rearrange
     cols_to_drop = ['track_id', 'popularity', 'duration_ms', 'instrumentalness', 'loudness']
     playlist_df.drop(columns=cols_to_drop, inplace=True)
-    cols_order = ['track_image_url', 'track_name', 'artists', 'track_genre', 'valence', 'tempo', 'energy', 'danceability']
+    cols_order = ['track_image_url', 'track_url', 'track_name', 'artists', 'track_genre', 'valence', 'tempo', 'energy', 'danceability']
     playlist_df = playlist_df[cols_order]
 
     # remove existing file

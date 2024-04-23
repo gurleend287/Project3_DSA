@@ -156,8 +156,8 @@ function App() {
         <div className="card" key={index}>
         <img src={row[0]} alt="Track cover" className="image" />
         <Card.Description className="card-description">
-            Track: {row[1]} <br />
-            Artist: {row[2]} <br />
+            Track: {row[2]} <br />
+            Artist: {row[3]} <br />
         </Card.Description>
         </div>
     ))}
