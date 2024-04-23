@@ -154,7 +154,9 @@ function App() {
     <div className="card-container">
     {csvData.slice(1, textInput + 1).map((row, index) => (
         <div className="card" key={index}>
+        <a href={row[1]} target="_blank" rel="noopener noreferrer">
         <img src={row[0]} alt="Track cover" className="image" />
+        </a>
         <Card.Description className="card-description">
             Track: {row[2]} <br />
             Artist: {row[3]} <br />
