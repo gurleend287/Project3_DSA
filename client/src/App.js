@@ -11,6 +11,8 @@ function App() {
   const [radioOption, setRadioOption] = useState('option1');
   const [response, setResponse] = useState('');
   const [csvData, setCsvData] = useState([]);
+  const [averageDifference, setAverageDifference] = useState(0);
+
 
   const handleSubmit = async () => {
     try {
@@ -28,6 +30,7 @@ function App() {
 
       const responseData = await response.json();
       setResponse(responseData.response);
+      setAverageDifference(responseData.average_difference); // Add this line to set the average difference
 
     } catch (error) {
       console.error('Error:', error);
@@ -143,15 +146,18 @@ function App() {
           ))}
         </div>
       )}
+    
+    {/* Display Average Difference */}
+    {averageDifference !== 0 && <p>Average Difference: {averageDifference.toFixed(2)}</p>}
 
-
-
+    {/* Display Cards  */}
     <div className="card-container">
     {csvData.slice(1, textInput + 1).map((row, index) => (
         <div className="card" key={index}>
         <img src={row[0]} alt="Track cover" className="image" />
         <Card.Description className="card-description">
-            {row[1]} - {row[2]}  
+            Track: {row[1]} <br />
+            Artist: {row[2]} <br />
         </Card.Description>
         </div>
     ))}

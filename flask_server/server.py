@@ -93,10 +93,10 @@ def receive_rating():
     # Sum up all the absolute differences
     total_difference = sum(difference.values())
 
-# Find the number of differences
+    #  Find the number of differences
     num_differences = len(difference)
 
-# Calculate the average difference
+    # Calculate the average difference
     average_difference = total_difference / num_differences
 
     print("Average difference:", average_difference)
@@ -123,8 +123,8 @@ def receive_rating():
     # Process the rating (For demonstration, just returning it back)
     response = f"Received rating: {rating}"
 
-    return jsonify({'response': response})
-
+    # Return average difference in the response
+    return jsonify({'response': response, 'average_difference': average_difference})
 @app.route('/get_csv_data')
 def get_csv_data():
     with open('final_playlist.csv', 'r') as file:

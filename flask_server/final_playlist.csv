@@ -1,13 +1,19 @@
 track_image_url,track_name,artists,track_genre,valence,tempo,energy,danceability
-https://i.scdn.co/image/ab67616d00001e02d42b80c9b6fa4cdf784ac8a5,ily (i love you baby),Andrew Foy,acoustic,0.414,110.154,0.112,0.706
-https://i.scdn.co/image/ab67616d00001e02e8905408dcd8913f35f2c32f,C'est si bon,Aoi Teshima,acoustic,0.479,113.913,0.203,0.735
-https://i.scdn.co/image/ab67616d00001e022ae5d91095669b5012d14965,God Only Knows,Kina Grannis,acoustic,0.507,106.686,0.125,0.658
-https://i.scdn.co/image/ab67616d00001e02153c128f1bfde8c6b55b338a,Build Me Up Buttercup,Kina Grannis,acoustic,0.576,124.868,0.0963,0.721
-https://i.scdn.co/image/ab67616d00001e0282a4060dcd08ec95f9ca752b,As It Was - Acoustic,Amber Leigh Irish,acoustic,0.513,118.162,0.0477,0.595
-https://i.scdn.co/image/ab67616d00001e0254ae76f4a06d7d431012cdd6,Beyond The Sea,Kina Grannis,acoustic,0.517,103.948,0.118,0.676
-https://i.scdn.co/image/ab67616d00001e02e02585fc748140202a64660a,Seven Nation Army - Acoustic Covers Versions of Popular Songs,Vendredi,acoustic,0.538,109.822,0.208,0.773
-https://i.scdn.co/image/ab67616d00001e02b86cd62c701fedec3f15f97c,Mujer con Abanico,Agustín Amigó,acoustic,0.471,103.939,0.135,0.769
-https://i.scdn.co/image/ab67616d00001e02ca91cf5c5300ebfd14fbe9f5,Better Together,Us The Duo,acoustic,0.553,109.891,0.311,0.761
-https://i.scdn.co/image/ab67616d00001e02b060025ed0a740a1e92696a2,There She Goes,Clementine Duo,acoustic,0.527,106.966,0.28,0.724
-https://i.scdn.co/image/ab67616d00001e0223964d6ff0be2f6ebd7aa6ae,Something Stupid,Bailey Pelkman,acoustic,0.491,117.961,0.261,0.789
-https://i.scdn.co/image/ab67616d00001e02cff531786485fee6fa0a517d,Isn't She Lovely - Acoustic,Callum J Wright,acoustic,0.424,115.671,0.306,0.69
+https://i.scdn.co/image/ab67616d00001e02b143f3c2f059dffa03925d00,Sabrina (feat. Oscar D'León),Los Amigos Invisibles,afrobeat,0.826,195.646,0.885,0.458
+https://i.scdn.co/image/ab67616d00001e023be73241fed381886709f761,It's The End Of The World As We Know It (And I Feel Fine),R.E.M.,alt-rock,0.797,205.528,0.894,0.381
+https://i.scdn.co/image/ab67616d00001e0248cbdef454b5636ee5ebeb34,No title,Reol,anime,0.884,199.751,0.874,0.502
+https://i.scdn.co/image/ab67616d00001e0241c64c8188690a15ae1b85eb,Levi,Old Crow Medicine Show,bluegrass,0.879,201.077,0.731,0.501
+https://i.scdn.co/image/ab67616d00001e02a214e8c4cf7f29e6bed977bf,Don’t Weep For Me,Blue Highway,bluegrass,0.811,205.864,0.775,0.488
+https://i.scdn.co/image/ab67616d00001e022ea58d13c3df6dd3923b1d50,The Whiskey or the Coal,Big Country Bluegrass,bluegrass,0.879,200.166,0.716,0.487
+https://i.scdn.co/image/ab67616d00001e02c11a2f41352af5dcb2a7e31a,Riding with the King,Eric Clapton,blues,0.824,204.028,0.796,0.462
+https://i.scdn.co/image/ab67616d00001e0246841ff5be28eb1831c17293,Every Move I Make,Shout Praises Kids,children,0.943,200.104,0.903,0.486
+https://i.scdn.co/image/ab67616d00001e02cc0be5ea933fbb31a173827c,Shekere,Yemi Alade,dancehall,0.847,213.674,0.929,0.599
+https://i.scdn.co/image/ab67616d00001e02bfe06306eea81975016eae7c,Se Ve Sola,Shamanes Crew,dancehall,0.948,219.571,0.86,0.519
+https://i.scdn.co/image/ab67616d00001e029300f9e1bcc5ce947435b7cc,Hurtin' Me,Stefflon Don,dancehall,0.799,203.712,0.794,0.535
+https://i.scdn.co/image/ab67616d00001e02dd5ab06427fcc4f6ed14b1ae,Collabo,P-Square,dancehall,0.905,194.825,0.903,0.566
+https://i.scdn.co/image/ab67616d00001e024f1892367331d1d418fc926a,Italian Radio,Blue October,grunge,0.821,198.275,0.831,0.35
+https://i.scdn.co/image/ab67616d00001e02da158c90b93c46c904583d6c,Sweet Kinda Summer,Jesse Rice,guitar,0.945,200.04,0.785,0.518
+https://i.scdn.co/image/ab67616d00001e02d6dd606b863e723aecce7666,Could It Be I'm Falling in Love,The Spinners,disco,0.826,207.266,0.727,0.382
+https://i.scdn.co/image/ab67616d00001e02091326412f0fe86827136d11,Bruk Off Yuh Back (feat. Chris Brown),Konshens,dancehall,0.939,202.052,0.748,0.58
+https://i.scdn.co/image/ab67616d00001e0241c64c8188690a15ae1b85eb,Half Mile Down,Old Crow Medicine Show,bluegrass,0.91,200.812,0.643,0.48
+https://i.scdn.co/image/ab67616d00001e02d7cfb27186eb58e09407a941,Mr. Lee,The Bobbettes,blues,0.872,203.334,0.602,0.493
