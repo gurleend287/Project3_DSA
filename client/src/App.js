@@ -13,7 +13,7 @@ function App() {
   const [csvData, setCsvData] = useState([]);
   const [averageDifference, setAverageDifference] = useState(0);
 
-
+  // configure what happens when submit is entered
   const handleSubmit = async () => {
     try {
       const response = await fetch('/send_rating', {
@@ -29,7 +29,7 @@ function App() {
       });
 
       const responseData = await response.json();
-      setResponse(responseData.response);
+      setResponse(responseData.response); // get input data
       setAverageDifference(responseData.average_difference); // Add this line to set the average difference
 
     } catch (error) {
@@ -37,6 +37,7 @@ function App() {
     }
   };
 
+  // get CVS data
   const handleFetchCsvData = async () => {
     try {
       const csvResponse = await fetch(`/get_csv_data`);
@@ -47,7 +48,6 @@ function App() {
       console.error('Error fetching CSV data:', error);
     }
   };
-
 
   const handleGetPlaylist = async () => {
     try {

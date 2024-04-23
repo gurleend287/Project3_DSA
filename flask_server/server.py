@@ -22,19 +22,19 @@ def receive_rating():
     textInput = data.get('textInput')
     radioOption = data.get('radioOption')
     
-    # Store the rating in a variable
-    # app.rating = rating
-
+    # parse the input data from the front end into variables 
     mood_input= int(rating)
     playlist_size=int(textInput)
     search_input_str= str(radioOption)
     search_input = None
 
+    # set value 1=BFS and 2=DFS
     if (search_input_str == "option1"):
         search_input=1
     if (search_input_str == "option2"):
         search_input=2
 
+    # validates values in console 
     print("______") 
     print(mood_input)
     print(playlist_size)
@@ -48,9 +48,6 @@ def receive_rating():
     # may need to broaden ranges/overlap if not enough songs meet criteria
     ranges_map = playlist.criteria_ranges(df, criteria, num_ranges=5)
     
-    # user input - command line
-    # mood_input, playlist_size, search_input = playlist.get_user_input()
-
     # thesholds based on mood input
     threshold_map = playlist.define_thesholds(ranges_map, mood_input)
     print(threshold_map)

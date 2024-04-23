@@ -68,7 +68,7 @@ class Graph:
         for neighbor, _ in self.adj_list.get((start.track_id, start), []):
             neighbor_node = neighbor[1]
             if neighbor_node.track_id not in visited:
-                self.dfs(neighbor_node, visited)
+                self.dfs(neighbor_node, visited) # implemented recurisvely
 
     # breath first traversal    
     def bfs(self, start: Node, out_file="bfs.csv"):
@@ -89,7 +89,7 @@ class Graph:
             start = queue.popleft()
             
             if start.track_id not in visited:
-                visited.add(start.track_id)
+                visited.add(start.track_id) # add to queue if not visited all ready
 
                 # write data to csv file
                 with open(out_file, mode='a', newline='') as file:
@@ -97,5 +97,6 @@ class Graph:
                     writer.writerow([start.track_id, start.popularity, start.duration_ms, start.danceability,
                                      start.energy, start.loudness, start.instrumentalness, start.valence, start.tempo, start.track_genre])
                 
+                # check the neighbors too see if node needs to be processed
                 for neighbor, _ in self.adj_list[(start.track_id, start)]:
                     queue.append(neighbor[1])
